@@ -63,7 +63,7 @@ model VerificationToken {
 model Recipe {
   id          String @id @default(cuid())
   name        String
-  description String
+  description String?
   image       String?
   prepTime    Int
   cookTime    Int
@@ -84,15 +84,15 @@ model Recipe {
 model RecipeIngridient {
   id String @id @default(cuid())
 
-  amount Float
+  amount Float?
 
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
 
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String
-  unit         Unit      @relation(fields: [unitId], references: [id])
-  unitId       String
+  unit         Unit?      @relation(fields: [unitId], references: [id])
+  unitId       String?
 }
 
 model Ingredient {
