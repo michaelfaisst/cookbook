@@ -49,6 +49,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Recipe        Recipe[]
 }
 
 model VerificationToken {
@@ -57,4 +58,79 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Recipe {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  image       String?
+  prepTime    Int
+  cookTime    Int
+  chillTime   Int
+  totalTime   Int
+  servings    Int
+
+  createdBy   User      @relation(fields: [createdById], references: [id])
+  createdById String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+
+  tags   Tag[]
+  ingridients  RecipeIngridient[]
+  instructions RecipeInstruction[]
+}
+
+model RecipeIngridient {
+  id String @id @default(cuid())
+
+  amount Float
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId String
+  unit         Unit      @relation(fields: [unitId], references: [id])
+  unitId       String
+}
+
+model Ingredient {
+  id    String @id @default(cuid())
+  name  String
+  image String?
+
+  RecipeIngridient RecipeIngridient[]
+}
+
+model Unit {
+  id   String @id @default(cuid())
+  name String
+
+  RecipeIngridient RecipeIngridient[]
+}
+
+model RecipeInstruction {
+  id String @id @default(cuid())
+
+  stepNumber  Int
+  instruction String
+  image       String?
+
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+}
+
+model Category {
+  id   String @id @default(cuid())
+  name String
+
+  recipes Recipe[]
+}
+
+model Tag {
+  id   String @id @default(cuid())
+  name String
+
+  recipes Recipe[]
 }
