@@ -28,15 +28,13 @@ const RecipePage = () => {
             </h1>
             <p className="mb-2">{recipe.description}</p>
 
-            {recipe.prepTime > 0 && (
+            {recipe.prepTime && (
                 <p>Vorbereitungszeit: {recipe.prepTime} Minuten</p>
             )}
 
-            {recipe.cookTime > 0 && <p>Kochzeit: {recipe.cookTime} Minuten</p>}
+            {recipe.cookTime && <p>Kochzeit: {recipe.cookTime} Minuten</p>}
 
-            {recipe.chillTime > 0 && (
-                <p>Chill time: {recipe.chillTime} Minuten</p>
-            )}
+            {recipe.chillTime && <p>Chill time: {recipe.chillTime} Minuten</p>}
 
             <p>Total time: {recipe.totalTime} minuten</p>
 
@@ -44,7 +42,7 @@ const RecipePage = () => {
 
             <ul className="list-disc">
                 {recipe.ingridients.map((ingredient) => (
-                    <li>
+                    <li key={ingredient.id}>
                         {ingredient.amount} {ingredient.unit?.name}{" "}
                         {ingredient.ingredient.name}
                     </li>
@@ -55,7 +53,7 @@ const RecipePage = () => {
 
             <ol className="list-decimal">
                 {recipe.instructions?.map((step) => (
-                    <li>{step.instruction}</li>
+                    <li key={step.id}>{step.instruction}</li>
                 ))}
             </ol>
         </Layout>
