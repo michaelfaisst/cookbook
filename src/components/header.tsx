@@ -1,5 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { faSearch } from "@fortawesome/pro-light-svg-icons";
 
 const Header = () => {
     const { data: session, status } = useSession();
@@ -27,9 +29,17 @@ const Header = () => {
     };
 
     return (
-        <div className="flex items-center justify-between border-b border-solid border-indigo-200 py-4">
-            <h1>Manuelas tolle Rezepte!!!!</h1>
-            {renderUser()}
+        <div className="flex flex-row justify-center bg-gray-900 p-2">
+            <div className="flex w-full max-w-7xl flex-row items-center justify-between">
+                <div>
+                    <FontAwesomeIcon
+                        icon={faSearch}
+                        className="text-lg text-white"
+                    />
+                </div>
+                <div>/* Maybe menu goes here */</div>
+                {renderUser()}
+            </div>
         </div>
     );
 };
