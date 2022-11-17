@@ -1,4 +1,5 @@
 import { RecipeListOutput } from "@/utils/types";
+import Link from "next/link";
 import React from "react";
 
 interface Props {
@@ -10,19 +11,19 @@ const RecipeCard = (props: Props) => {
 
     return (
         <div className="rounded-lg border border-gray-200 bg-white shadow-md">
-            <a href="#">
+            <Link href={`/recipe/${recipe.id}`}>
                 <img className="rounded-t-lg" src={recipe.image || undefined} />
                 <div className="p-5">
-                    <a href="#">
+                    <Link href={`/recipe/${recipe.id}`}>
                         <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                             {recipe.name}
                         </h3>
                         <p className="font-normal text-gray-700">
                             {recipe.description}
                         </p>
-                    </a>
+                    </Link>
                 </div>
-            </a>
+            </Link>
         </div>
     );
 };
