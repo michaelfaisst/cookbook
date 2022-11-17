@@ -1,6 +1,7 @@
 import { signIn, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 import { faSearch } from "@fortawesome/pro-light-svg-icons";
 
 const Header = () => {
@@ -37,7 +38,11 @@ const Header = () => {
                         className="text-lg text-white"
                     />
                 </div>
-                <div>/* Maybe menu goes here */</div>
+                <div>
+                    <Link href="/" className="text-white">
+                        Rezepte
+                    </Link>
+                </div>
                 {renderUser()}
             </div>
         </div>
