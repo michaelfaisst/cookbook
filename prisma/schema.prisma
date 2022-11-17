@@ -65,9 +65,9 @@ model Recipe {
   name        String
   description String?
   image       String?
-  prepTime    Int
-  cookTime    Int
-  chillTime   Int
+  prepTime    Int?
+  cookTime    Int?
+  chillTime   Int?
   totalTime   Int
   servings    Int
 

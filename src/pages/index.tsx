@@ -1,3 +1,4 @@
+import Button from "@/components/common/button";
 import Layout from "@/components/layout";
 import RecipeCard from "@/components/recipe-card";
 import { trpc } from "@/utils/trpc";
@@ -14,12 +15,9 @@ const Home: NextPage = () => {
                 <h1 className="text-4xl font-light text-yellow-800">
                     Manuelas Rezepte
                 </h1>
-                <button
-                    className="rounded-lg bg-yellow-800 px-5 py-2.5 text-sm font-medium text-white"
-                    onClick={() => router.push("/recipe/new")}
-                >
+                <Button onClick={() => router.push("/recipe/new")}>
                     Neues Rezept
-                </button>
+                </Button>
             </div>
 
             <div className="grid grid-cols-4">

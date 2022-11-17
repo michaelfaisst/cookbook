@@ -17,7 +17,10 @@ export const serverSchema = z.object({
         process.env.VERCEL ? z.string() : z.string().url()
     ),
     GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string()
+    GOOGLE_CLIENT_SECRET: z.string(),
+    CLOUDINARY_CLOUD_KEY: z.string(),
+    CLOUDINARY_API_KEY: z.string(),
+    CLOUDINARY_API_SECRET: z.string()
 });
 
 /**
