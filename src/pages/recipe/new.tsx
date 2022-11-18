@@ -5,11 +5,14 @@ import TextArea from "@/components/common/textarea";
 import Layout from "@/components/layout";
 import { createRecipeSchema } from "@/utils/validators";
 import type { CreateRecipeType } from "@/utils/validators";
-import React from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { trpc } from "@/utils/trpc";
 import FormError from "@/components/common/form-error";
+import Select from "@/components/common/select";
+import { IngredientListOutput } from "@/utils/types";
+import { Ingredient } from "@prisma/client";
 
 const NewRecipePage = () => {
     const { data: ingredients } = trpc.ingredients.getIngredients.useQuery();
@@ -33,6 +36,8 @@ const NewRecipePage = () => {
         control,
         name: "ingredients"
     });
+
+    const [testState, setTestState] = useState<number | undefined>(1);
 
     console.log(errors);
 
@@ -126,6 +131,34 @@ const NewRecipePage = () => {
                             <Input
                                 type="number"
                                 {...register(`ingredients.${index}.amount`)}
+                            />
+                        </div>
+
+                        <div>
+                            <Label>Einheit</Label>
+                        </div>
+
+                        <div>
+                            <Label>Zutat</Label>
+                            <Controller
+                                name={`ingredients.${index}.ingridientId`}
+                                control={control}
+                                render={({ field }) => (
+                                    <Select<string, Ingredient>
+                                        value={field.value}
+                                        onChange={field.onChange}
+                                        data={ingredients || []}
+                                        renderInputValue={(value) => value.name}
+                                        renderOption={(value) => value.name}
+                                        filter={(query, value) =>
+                                            value.name
+                                                .toLowerCase()
+                                                .includes(query.toLowerCase())
+                                        }
+                                        keyProp={(value) => value.id}
+                                        valueProp={(value) => value.id}
+                                    />
+                                )}
                             />
                         </div>
                     </div>
