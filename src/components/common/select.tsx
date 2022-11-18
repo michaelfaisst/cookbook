@@ -11,6 +11,7 @@ interface Props<TVal, T> {
     renderInputValue: (obj: T) => string;
     renderOption: (obj: T) => string;
     filter: (query: string, obj: T) => boolean;
+    error?: string;
 }
 
 const Select = <TVal, T>(props: Props<TVal, T>) => {
@@ -22,12 +23,20 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
         onChange,
         renderInputValue,
         renderOption,
-        filter
+        filter,
+        error
     } = props;
     const [query, setQuery] = useState("");
 
     const filteredData =
         query === "" ? data : data.filter((item) => filter(query, item));
+
+    let inputClasses =
+        "w-full rounded-lg border border-gray-300 p-2.5 pr-10 text-sm leading-5 text-gray-900 focus:ring-0";
+
+    if (error) {
+        inputClasses = `${inputClasses} border-red-400`;
+    }
 
     return (
         <Combobox
@@ -38,7 +47,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
             <div className="relative">
                 <div className="relative block w-full cursor-default rounded-lg bg-white focus:border-blue-500 focus:ring-blue-500">
                     <Combobox.Input
-                        className="w-full rounded-lg border border-gray-300 p-2.5 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                        className={inputClasses}
                         displayValue={(item) => {
                             const selectedObj = data.find(
                                 (x) => valueProp(x) === item
@@ -57,7 +66,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
                     </Combobox.Button>
                 </div>
 
-                <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {filteredData.length === 0 && query !== "" ? (
                         <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
                             Nichts gefunden.

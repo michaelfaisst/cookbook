@@ -4,7 +4,8 @@ module.exports = {
     theme: {
         extend: {
             gridTemplateColumns: {
-                ingridientsForm: "24px 100px 200px 300px"
+                ingridientsForm: "100px 200px 300px 24px",
+                instructionsForm: "auto 1fr auto"
             }
         }
     },

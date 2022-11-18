@@ -10,9 +10,14 @@ export const createRecipeSchema = z.object({
     categoryId: z.string().cuid(),
     ingredients: z.array(
         z.object({
-            amount: z.number().min(1).optional(),
+            amount: z.number().min(0).optional(),
             ingridientId: z.string().cuid(),
             unitId: z.string().cuid().optional()
+        })
+    ),
+    instructions: z.array(
+        z.object({
+            instruction: z.string()
         })
     )
 });

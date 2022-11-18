@@ -113,7 +113,6 @@ model Unit {
 model RecipeInstruction {
   id String @id @default(cuid())
 
-  stepNumber  Int
   instruction String
   image       String?
 
