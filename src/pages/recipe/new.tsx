@@ -6,17 +6,12 @@ import Layout from "@/components/layout";
 import { createRecipeSchema } from "@/utils/validators";
 import type { CreateRecipeType } from "@/utils/validators";
 import React, { useState } from "react";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { trpc } from "@/utils/trpc";
 import FormError from "@/components/common/form-error";
-import Select from "@/components/common/select";
-import { IngredientListOutput } from "@/utils/types";
-import { Ingredient } from "@prisma/client";
+import IngridientsForm from "@/components/ingridients-form/form";
 
 const NewRecipePage = () => {
-    const { data: ingredients } = trpc.ingredients.getIngredients.useQuery();
-
     const {
         register,
         handleSubmit,
@@ -31,13 +26,6 @@ const NewRecipePage = () => {
             chillTime: 0
         }
     });
-
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: "ingredients"
-    });
-
-    const [testState, setTestState] = useState<number | undefined>(1);
 
     console.log(errors);
 
@@ -122,57 +110,7 @@ const NewRecipePage = () => {
                     </div>
                 </div>
 
-                <h2 className="mt-4 mb-2 text-xl">Zutaten</h2>
-
-                {fields.map((field, index) => (
-                    <div key={field.id} className="flex flex-row gap-6">
-                        <div>
-                            <Label>Menge</Label>
-                            <Input
-                                type="number"
-                                {...register(`ingredients.${index}.amount`)}
-                            />
-                        </div>
-
-                        <div>
-                            <Label>Einheit</Label>
-                        </div>
-
-                        <div>
-                            <Label>Zutat</Label>
-                            <Controller
-                                name={`ingredients.${index}.ingridientId`}
-                                control={control}
-                                render={({ field }) => (
-                                    <Select<string, Ingredient>
-                                        value={field.value}
-                                        onChange={field.onChange}
-                                        data={ingredients || []}
-                                        renderInputValue={(value) => value.name}
-                                        renderOption={(value) => value.name}
-                                        filter={(query, value) =>
-                                            value.name
-                                                .toLowerCase()
-                                                .includes(query.toLowerCase())
-                                        }
-                                        keyProp={(value) => value.id}
-                                        valueProp={(value) => value.id}
-                                    />
-                                )}
-                            />
-                        </div>
-                    </div>
-                ))}
-
-                <Button
-                    onClick={() =>
-                        append({
-                            ingridientId: ""
-                        })
-                    }
-                >
-                    Zutat hinzufügen
-                </Button>
+                <IngridientsForm register={register} control={control} />
 
                 <Button type="submit">Speichern</Button>
             </form>
