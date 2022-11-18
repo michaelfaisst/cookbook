@@ -10,7 +10,7 @@ const Button = ({ className, ...restProps }: Props) => {
         classes = `${classes} ${className}`;
     }
 
-    return <button className={classes} {...restProps} />;
+    return <button type="button" className={classes} {...restProps} />;
 };
 
 export default Button;

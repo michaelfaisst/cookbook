@@ -4,14 +4,14 @@ import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
 import Label from "../common/label";
-import IngridientsFormLine from "./form-line";
+import IngredientsFormLine from "./form-line";
 
 interface Props {
     register: UseFormRegister<CreateRecipeType>;
     control: Control<CreateRecipeType, any>;
 }
 
-const IngridientsForm = (props: Props) => {
+const IngredientsForm = (props: Props) => {
     const { control, register } = props;
     const { data: ingredients } = trpc.ingredients.getIngredients.useQuery();
     const { data: units } = trpc.units.getUnits.useQuery();
@@ -39,14 +39,14 @@ const IngridientsForm = (props: Props) => {
             </div>
 
             {fields.length > 0 && (
-                <div className="mb-6 grid grid-cols-ingridientsForm gap-x-6 gap-y-3">
+                <div className="mb-6 grid grid-cols-ingredientsForm gap-x-6 gap-y-3">
                     <Label className="mb-0">Menge</Label>
                     <Label className="mb-0">Einheit</Label>
                     <Label className="mb-0">Zutat</Label>
                     <div />
 
                     {fields.map((item, index) => (
-                        <IngridientsFormLine
+                        <IngredientsFormLine
                             key={item.id}
                             index={index}
                             ingredients={ingredients}
@@ -65,4 +65,4 @@ const IngridientsForm = (props: Props) => {
     );
 };
 
-export default IngridientsForm;
+export default IngredientsForm;

@@ -5,12 +5,16 @@ import TextArea from "@/components/common/textarea";
 import Layout from "@/components/layout";
 import { createRecipeSchema } from "@/utils/validators";
 import type { CreateRecipeType } from "@/utils/validators";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/components/common/form-error";
-import IngridientsForm from "@/components/ingridients-form/form";
+import IngredientsForm from "@/components/ingredients-form/form";
 import InstructionsForm from "@/components/instructions-form/form";
+import { trpc } from "@/utils/trpc";
+import Select from "@/components/common/select";
+import { Category } from "@prisma/client";
+import { useRouter } from "next/router";
 
 const NewRecipePage = () => {
     const {
@@ -28,9 +32,18 @@ const NewRecipePage = () => {
         }
     });
 
-    console.log(errors);
+    const { data: categories } = trpc.categories.getCategories.useQuery();
+    const saveRecipeMutation = trpc.recipes.createRecipe.useMutation();
 
-    const onSubmit = (data: CreateRecipeType) => console.log(data);
+    const router = useRouter();
+
+    const onSubmit = async (data: CreateRecipeType) => {
+        await saveRecipeMutation.mutateAsync(data, {
+            onSuccess: (data) => {
+                router.push(`/recipe/${data.id}`);
+            }
+        });
+    };
 
     return (
         <Layout>
@@ -55,6 +68,32 @@ const NewRecipePage = () => {
                     <div>
                         <Label>Beschreibung</Label>
                         <TextArea {...register("description")} />
+                    </div>
+
+                    <div>
+                        <Label>Kategorie</Label>
+                        <Controller
+                            name="categoryId"
+                            control={control}
+                            render={({ field }) => (
+                                <Select<string, Category>
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    renderInputValue={(value) => value.name}
+                                    renderOption={(value) => value.name}
+                                    filter={(query, value) =>
+                                        value.name
+                                            .toLowerCase()
+                                            .includes(query.toLowerCase())
+                                    }
+                                    keyProp={(value) => value.id}
+                                    valueProp={(value) => value.id}
+                                    data={categories || []}
+                                    error={errors.categoryId?.message}
+                                />
+                            )}
+                        />
+                        <FormError error={errors.categoryId?.message} />
                     </div>
 
                     <div className="grid grid-cols-3 gap-6">
@@ -115,7 +154,7 @@ const NewRecipePage = () => {
                         </div>
                     </div>
 
-                    <IngridientsForm register={register} control={control} />
+                    <IngredientsForm register={register} control={control} />
                     <InstructionsForm register={register} control={control} />
                 </div>
             </form>

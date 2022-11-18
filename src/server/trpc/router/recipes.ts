@@ -15,7 +15,7 @@ export const recipesRouter = router({
                     id: input.id
                 },
                 include: {
-                    ingridients: {
+                    ingredients: {
                         include: {
                             ingredient: true,
                             unit: true
@@ -28,13 +28,22 @@ export const recipesRouter = router({
     createRecipe: protectedProcedure
         .input(createRecipeSchema)
         .mutation(({ ctx, input }) => {
+            const { ingredients, instructions, ...restInput } = input;
             const totalTime = input.prepTime + input.cookTime + input.chillTime;
 
             return prisma.recipe.create({
                 data: {
-                    ...input,
+                    ...restInput,
                     totalTime,
-                    createdById: ctx.session.user.id
+                    createdById: ctx.session.user.id,
+                    ingredients: {
+                        createMany: {
+                            data: ingredients
+                        }
+                    },
+                    instructions: {
+                        createMany: { data: instructions }
+                    }
                 }
             });
         })

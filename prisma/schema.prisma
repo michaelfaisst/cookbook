@@ -77,11 +77,11 @@ model Recipe {
   categoryId  String
 
   tags   Tag[]
-  ingridients  RecipeIngridient[]
+  ingredients  RecipeIngredient[]
   instructions RecipeInstruction[]
 }
 
-model RecipeIngridient {
+model RecipeIngredient {
   id String @id @default(cuid())
 
   amount Float?
@@ -100,14 +100,14 @@ model Ingredient {
   name  String
   image String?
 
-  RecipeIngridient RecipeIngridient[]
+  RecipeIngredient RecipeIngredient[]
 }
 
 model Unit {
   id   String @id @default(cuid())
   name String
 
-  RecipeIngridient RecipeIngridient[]
+  RecipeIngredient RecipeIngredient[]
 }
 
 model RecipeInstruction {

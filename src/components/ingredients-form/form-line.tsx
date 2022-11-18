@@ -22,7 +22,7 @@ interface Props {
     units?: Unit[];
 }
 
-const IngridientsFormLine = (props: Props) => {
+const IngredientsFormLine = (props: Props) => {
     const { index, control, ingredients, units, register, remove } = props;
 
     const { errors } = useFormState({
@@ -76,7 +76,7 @@ const IngridientsFormLine = (props: Props) => {
 
             <div>
                 <Controller
-                    name={`ingredients.${index}.ingridientId`}
+                    name={`ingredients.${index}.ingredientId`}
                     control={control}
                     render={({ field }) => (
                         <Select<string, Ingredient>
@@ -93,14 +93,14 @@ const IngridientsFormLine = (props: Props) => {
                             keyProp={(value) => value.id}
                             valueProp={(value) => value.id}
                             error={
-                                errors.ingredients?.[index]?.ingridientId
+                                errors.ingredients?.[index]?.ingredientId
                                     ?.message
                             }
                         />
                     )}
                 />
                 <FormError
-                    error={errors.ingredients?.[index]?.ingridientId?.message}
+                    error={errors.ingredients?.[index]?.ingredientId?.message}
                 />
             </div>
 
@@ -114,4 +114,4 @@ const IngridientsFormLine = (props: Props) => {
     );
 };
 
-export default IngridientsFormLine;
+export default IngredientsFormLine;

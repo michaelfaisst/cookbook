@@ -41,7 +41,7 @@ const RecipePage = () => {
             <h2 className="mt-5 mb-2 text-2xl">Zutaten</h2>
 
             <ul className="list-disc">
-                {recipe.ingridients.map((ingredient) => (
+                {recipe.ingredients.map((ingredient) => (
                     <li key={ingredient.id}>
                         {ingredient.amount} {ingredient.unit?.name}{" "}
                         {ingredient.ingredient.name}
