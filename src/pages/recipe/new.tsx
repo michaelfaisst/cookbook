@@ -6,20 +6,35 @@ import Layout from "@/components/layout";
 import { createRecipeSchema } from "@/utils/validators";
 import type { CreateRecipeType } from "@/utils/validators";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { trpc } from "@/utils/trpc";
+import FormError from "@/components/common/form-error";
 
 const NewRecipePage = () => {
+    const { data: ingredients } = trpc.ingredients.getIngredients.useQuery();
+
     const {
         register,
         handleSubmit,
+        control,
         formState: { errors }
     } = useForm<CreateRecipeType>({
         resolver: zodResolver(createRecipeSchema),
         defaultValues: {
-            name: "Neues Rezept"
+            name: "Neues Rezept",
+            prepTime: 0,
+            cookTime: 0,
+            chillTime: 0
         }
     });
+
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "ingredients"
+    });
+
+    console.log(errors);
 
     const onSubmit = (data: CreateRecipeType) => console.log(data);
 
@@ -35,7 +50,8 @@ const NewRecipePage = () => {
             >
                 <div>
                     <Label>Name</Label>
-                    <Input {...register("name")} />
+                    <Input error={errors.name?.message} {...register("name")} />
+                    <FormError error={errors.name?.message} />
                 </div>
 
                 <div>
@@ -46,19 +62,84 @@ const NewRecipePage = () => {
                 <div className="grid grid-cols-3 gap-6">
                     <div>
                         <Label>Vorbereitungszeit</Label>
-                        <Input {...register("prepTime")} />
+                        <div className="flex flex-row items-center gap-2">
+                            <Input
+                                type="number"
+                                min="0"
+                                className="w-20"
+                                {...register("prepTime", {
+                                    valueAsNumber: true
+                                })}
+                                error={errors.prepTime?.message}
+                            />
+                            <span className="text-sm text-slate-500">
+                                Minuten
+                            </span>
+                        </div>
+                        <FormError error={errors.prepTime?.message} />
                     </div>
 
                     <div>
                         <Label>Kochzeit</Label>
-                        <Input {...register("cookTime")} />
+                        <div className="flex flex-row items-center gap-2">
+                            <Input
+                                type="numer"
+                                min="0"
+                                className="w-20"
+                                {...register("cookTime", {
+                                    valueAsNumber: true
+                                })}
+                            />
+                            <span className="text-sm text-slate-500">
+                                Minuten
+                            </span>
+                        </div>
+                        <FormError error={errors.cookTime?.message} />
                     </div>
 
                     <div>
                         <Label>Stehzeit</Label>
-                        <Input {...register("chillTime")} />
+                        <div className="flex flex-row items-center gap-2">
+                            <Input
+                                type="number"
+                                min="0"
+                                className="w-20"
+                                error={errors.chillTime?.message}
+                                {...register("chillTime", {
+                                    valueAsNumber: true
+                                })}
+                            />
+                            <span className="text-sm text-slate-500">
+                                Minuten
+                            </span>
+                        </div>
+                        <FormError error={errors.chillTime?.message} />
                     </div>
                 </div>
+
+                <h2 className="mt-4 mb-2 text-xl">Zutaten</h2>
+
+                {fields.map((field, index) => (
+                    <div key={field.id} className="flex flex-row gap-6">
+                        <div>
+                            <Label>Menge</Label>
+                            <Input
+                                type="number"
+                                {...register(`ingredients.${index}.amount`)}
+                            />
+                        </div>
+                    </div>
+                ))}
+
+                <Button
+                    onClick={() =>
+                        append({
+                            ingridientId: ""
+                        })
+                    }
+                >
+                    Zutat hinzufügen
+                </Button>
 
                 <Button type="submit">Speichern</Button>
             </form>

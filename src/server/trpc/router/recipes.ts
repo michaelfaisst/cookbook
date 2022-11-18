@@ -28,10 +28,7 @@ export const recipesRouter = router({
     createRecipe: protectedProcedure
         .input(createRecipeSchema)
         .mutation(({ ctx, input }) => {
-            const totalTime =
-                (input.prepTime || 0) +
-                (input.cookTime || 0) +
-                (input.chillTime || 0);
+            const totalTime = input.prepTime + input.cookTime + input.chillTime;
 
             return prisma.recipe.create({
                 data: {

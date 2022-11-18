@@ -1,14 +1,31 @@
 import React, { HTMLProps } from "react";
 
-interface Props extends HTMLProps<HTMLInputElement> {}
+interface Props extends HTMLProps<HTMLInputElement> {
+    error?: string;
+}
 
-const Input = ({ className, ...restProps }: Props) => {
-    return (
-        <input
-            className="block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            {...restProps}
-        />
-    );
-};
+const Input = React.forwardRef<HTMLInputElement, Props>(
+    ({ className, error, ...restProps }, ref) => {
+        let classes =
+            "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500";
+
+        if (className) {
+            classes = `${classes} ${className}`;
+        }
+
+        if (error) {
+            classes = `${classes} border-red-600`;
+        }
+
+        return (
+            <input
+                ref={ref}
+                className={classes}
+                {...restProps}
+                aria-invalid={error ? "true" : "false"}
+            />
+        );
+    }
+);
 
 export default Input;
