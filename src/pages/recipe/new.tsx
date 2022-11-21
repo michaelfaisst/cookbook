@@ -1,15 +1,14 @@
 import Button from "@/components/common/button";
 import Layout from "@/components/layout";
-import { createRecipeSchema } from "@/utils/validators";
-import type { CreateRecipeType } from "@/utils/validators";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import GeneralRecipeForm from "@/components/recipe-forms/general-form";
 import IngredientsForm from "@/components/recipe-forms/ingredients-form";
 import InstructionsForm from "@/components/recipe-forms/instructions-form";
 import { trpc } from "@/utils/trpc";
+import type { CreateRecipeType } from "@/utils/validators";
+import { createRecipeSchema } from "@/utils/validators";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
-import GeneralRecipeForm from "@/components/recipe-forms/general-form";
+import { FormProvider, useForm } from "react-hook-form";
 
 const NewRecipePage = () => {
     const formMethods = useForm<CreateRecipeType>({
