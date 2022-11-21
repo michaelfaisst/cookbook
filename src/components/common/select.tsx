@@ -47,6 +47,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
             <div className="relative">
                 <div className="relative block w-full cursor-default rounded-lg bg-white focus:border-blue-500 focus:ring-blue-500">
                     <Combobox.Input
+                        autoComplete="off"
                         className={inputClasses}
                         displayValue={(item) => {
                             const selectedObj = data.find(

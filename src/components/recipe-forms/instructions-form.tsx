@@ -1,17 +1,11 @@
-import { CreateRecipeType } from "@/utils/validators";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import React, { Fragment } from "react";
-import { Control, useFieldArray, UseFormRegister } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import Button from "../common/button";
 import TextArea from "../common/textarea";
 
-interface Props {
-    register: UseFormRegister<CreateRecipeType>;
-    control: Control<CreateRecipeType, any>;
-}
-
-const InstructionsForm = (props: Props) => {
-    const { control, register } = props;
+const InstructionsForm = () => {
+    const { control, register } = useFormContext();
 
     const { fields, append, remove } = useFieldArray({
         control,
