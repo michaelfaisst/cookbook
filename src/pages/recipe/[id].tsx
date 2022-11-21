@@ -1,3 +1,4 @@
+import Button from "@/components/common/button";
 import Layout from "@/components/layout";
 import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
@@ -7,11 +8,9 @@ const RecipePage = () => {
     const router = useRouter();
     const { id } = router.query;
 
-    const {
-        data: recipe,
-        isLoading,
-        isError
-    } = trpc.recipes.getRecipe.useQuery({ id: id as string });
+    const { data: recipe, isLoading } = trpc.recipes.getRecipe.useQuery({
+        id: id as string
+    });
 
     if (!recipe || isLoading) {
         return <Layout>Loading...</Layout>;
@@ -23,9 +22,12 @@ const RecipePage = () => {
                 <img className="w-96 rounded-lg" src={recipe.image} />
             )}
 
-            <h1 className="py-5 text-4xl font-light text-yellow-800">
-                {recipe.name}
-            </h1>
+            <div className="flex flex-row justify-between py-5">
+                <h1 className="text-4xl font-light text-yellow-800">
+                    {recipe.name}
+                </h1>
+                {recipe.editable && <Button>Editieren</Button>}
+            </div>
             <p className="mb-2">{recipe.description}</p>
 
             {recipe.prepTime && (

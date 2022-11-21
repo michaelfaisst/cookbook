@@ -1,4 +1,4 @@
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,11 +13,15 @@ const Header = () => {
         }
 
         if (!session) {
-            return <button onClick={() => signIn("google")}>Login</button>;
+            return (
+                <button onClick={() => signIn("google")} className="text-white">
+                    Login
+                </button>
+            );
         }
 
         return (
-            <div>
+            <div onClick={() => signOut()}>
                 <Image
                     src={session.user?.image || ""}
                     width={32}

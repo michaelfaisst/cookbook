@@ -9,8 +9,8 @@ export const recipesRouter = router({
     }),
     getRecipe: publicProcedure
         .input(z.object({ id: z.string().cuid() }))
-        .query(({ input }) => {
-            return prisma.recipe.findFirstOrThrow({
+        .query(async ({ ctx, input }) => {
+            const result = await prisma.recipe.findFirstOrThrow({
                 where: {
                     id: input.id
                 },
@@ -24,6 +24,11 @@ export const recipesRouter = router({
                     instructions: true
                 }
             });
+
+            return {
+                ...result,
+                editable: result.createdById === ctx.session?.user?.id
+            };
         }),
     createRecipe: protectedProcedure
         .input(createRecipeSchema)
