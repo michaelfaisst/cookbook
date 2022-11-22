@@ -1,9 +1,14 @@
 import { trpc } from "@/utils/trpc";
 import { CreateRecipeType } from "@/utils/validators";
+import { PlusIcon } from "@heroicons/react/20/solid";
+import { useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
 import Label from "../common/label";
+import Link from "../common/link";
+import CreateIngredientModal from "../modals/create-ingredient";
+import CreateUnitModal from "../modals/create-unit";
 import IngredientsFormLine from "./ingredients-form-line";
 
 const IngredientsForm = () => {
@@ -15,6 +20,9 @@ const IngredientsForm = () => {
         control,
         name: "ingredients"
     });
+
+    const [unitModalOpen, setUnitModalOpen] = useState(false);
+    const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
 
     return (
         <div>
@@ -36,8 +44,27 @@ const IngredientsForm = () => {
             {fields.length > 0 && (
                 <div className="mb-6 grid grid-cols-ingredientsForm gap-x-6 gap-y-3">
                     <Label className="mb-0">Menge</Label>
-                    <Label className="mb-0">Einheit</Label>
-                    <Label className="mb-0">Zutat</Label>
+
+                    <div className="mb-0 flex flex-row items-center justify-between">
+                        <Label className="mb-0">Einheit</Label>
+                        <Link
+                            icon={PlusIcon}
+                            onClick={() => setUnitModalOpen(true)}
+                        >
+                            Erstellen
+                        </Link>
+                    </div>
+
+                    <div className="mb-0 flex flex-row items-center justify-between">
+                        <Label className="mb-0">Zutat</Label>
+                        <Link
+                            icon={PlusIcon}
+                            onClick={() => setIngredientModalOpen(true)}
+                        >
+                            Erstellen
+                        </Link>
+                    </div>
+
                     <div />
 
                     {fields.map((item, index) => (
@@ -55,6 +82,16 @@ const IngredientsForm = () => {
             <Button className="w-48" onClick={() => append({} as any)}>
                 Zutat hinzufügen
             </Button>
+
+            <CreateUnitModal
+                open={unitModalOpen}
+                onClose={() => setUnitModalOpen(false)}
+            />
+
+            <CreateIngredientModal
+                open={ingredientModalOpen}
+                onClose={() => setIngredientModalOpen(false)}
+            />
         </div>
     );
 };

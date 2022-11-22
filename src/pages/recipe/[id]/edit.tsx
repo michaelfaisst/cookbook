@@ -9,42 +9,35 @@ import { createRecipeSchema } from "@/utils/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
-import { CheckIcon } from "@heroicons/react/24/outline";
 
 const NewRecipePage = () => {
-    const formMethods = useForm<CreateRecipeType>({
-        resolver: zodResolver(createRecipeSchema),
-        defaultValues: {
-            name: "Neues Rezept",
-            prepTime: 0,
-            cookTime: 0,
-            chillTime: 0
-        }
+    const router = useRouter();
+    const { id } = router.query;
+
+    const { data: recipe } = trpc.recipes.getRecipe.useQuery({
+        id: id as string
     });
 
-    const saveRecipeMutation = trpc.recipes.createRecipe.useMutation();
+    const formMethods = useForm<CreateRecipeType>({
+        resolver: zodResolver(createRecipeSchema),
+        values: recipe ? (recipe as CreateRecipeType) : undefined
+    });
 
-    const router = useRouter();
+    const recipeTitle = formMethods.watch("name");
 
     const onSubmit = async (data: CreateRecipeType) => {
-        await saveRecipeMutation.mutateAsync(data, {
-            onSuccess: (data) => {
-                router.push(`/recipe/${data.id}`);
-            }
-        });
+        console.log(data);
     };
 
     return (
         <Layout>
             <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-                    <div className="mb-10 flex flex-row items-center justify-between">
-                        <h1 className="text-2xl font-bold leading-7 text-gray-900">
-                            Neues Rezept
+                    <div className="flex flex-row items-center justify-between">
+                        <h1 className="mb-6 text-4xl font-light text-yellow-800">
+                            {recipeTitle}
                         </h1>
-                        <Button mode="primary" type="submit" icon={CheckIcon}>
-                            Speichern
-                        </Button>
+                        <Button type="submit">Speichern</Button>
                     </div>
 
                     <div className="flex flex-col gap-6">

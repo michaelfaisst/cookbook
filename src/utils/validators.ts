@@ -22,4 +22,14 @@ export const createRecipeSchema = z.object({
     )
 });
 
+export const createUnitSchema = z.object({
+    name: z.string().min(1)
+});
+
+export const createIngredientSchema = z.object({
+    name: z.string().min(1)
+});
+
 export type CreateRecipeType = z.infer<typeof createRecipeSchema>;
+export type CreateUnitType = z.infer<typeof createUnitSchema>;
+export type CreateIngredientType = z.infer<typeof createIngredientSchema>;

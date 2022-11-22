@@ -5,7 +5,22 @@ import { createRecipeSchema } from "@/utils/validators";
 
 export const recipesRouter = router({
     getRecipes: publicProcedure.query(() => {
-        return prisma.recipe.findMany();
+        return prisma.recipe.findMany({
+            include: {
+                category: {
+                    select: {
+                        name: true
+                    }
+                },
+                createdBy: {
+                    select: {
+                        name: true,
+                        image: true,
+                        id: true
+                    }
+                }
+            }
+        });
     }),
     getRecipe: publicProcedure
         .input(z.object({ id: z.string().cuid() }))

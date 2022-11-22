@@ -1,12 +1,10 @@
 import { CreateRecipeType } from "@/utils/validators";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Ingredient, Unit } from "@prisma/client";
-import React from "react";
 import {
     Controller,
     UseFieldArrayRemove,
-    useFormContext,
-    useFormState
+    useFormContext
 } from "react-hook-form";
 import FormError from "../common/form-error";
 import Input from "../common/input";

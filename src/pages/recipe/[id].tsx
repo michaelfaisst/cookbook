@@ -26,7 +26,11 @@ const RecipePage = () => {
                 <h1 className="text-4xl font-light text-yellow-800">
                     {recipe.name}
                 </h1>
-                {recipe.editable && <Button>Editieren</Button>}
+                {recipe.editable && (
+                    <Button onClick={() => router.push(`/recipe/${id}/edit`)}>
+                        Editieren
+                    </Button>
+                )}
             </div>
             <p className="mb-2">{recipe.description}</p>
 
