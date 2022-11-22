@@ -19,19 +19,28 @@ const GeneralRecipeForm = () => {
     const { data: categories } = trpc.categories.getCategories.useQuery();
 
     return (
-        <Fragment>
-            <div>
+        <div>
+            <div className="mb-6">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Allgemeine Information
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                    Hier kannst du allgemeine Informationen zu deinem Rezept
+                    angeben
+                </p>
+            </div>
+            <div className="mb-6">
                 <Label>Name</Label>
                 <Input error={errors.name?.message} {...register("name")} />
                 <FormError error={errors.name?.message} />
             </div>
 
-            <div>
+            <div className="mb-6">
                 <Label>Beschreibung</Label>
                 <TextArea {...register("description")} />
             </div>
 
-            <div>
+            <div className="mb-6">
                 <Label>Kategorie</Label>
                 <Controller
                     name="categoryId"
@@ -108,7 +117,7 @@ const GeneralRecipeForm = () => {
                     <FormError error={errors.chillTime?.message} />
                 </div>
             </div>
-        </Fragment>
+        </div>
     );
 };
 

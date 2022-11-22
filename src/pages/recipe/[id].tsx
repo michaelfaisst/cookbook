@@ -1,4 +1,5 @@
 import Button from "@/components/common/button";
+import Loading from "@/components/common/loading";
 import Layout from "@/components/layout";
 import { trpc } from "@/utils/trpc";
 import { useRouter } from "next/router";
@@ -13,7 +14,11 @@ const RecipePage = () => {
     });
 
     if (!recipe || isLoading) {
-        return <Layout>Loading...</Layout>;
+        return (
+            <Layout>
+                <Loading className="flex h-full flex-1 items-center justify-center bg-gray-50" />
+            </Layout>
+        );
     }
 
     return (

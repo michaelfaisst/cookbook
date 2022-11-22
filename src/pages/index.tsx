@@ -5,6 +5,7 @@ import { trpc } from "@/utils/trpc";
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const Home: NextPage = () => {
     const { data: session } = useSession();
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
                         <Button
                             mode="primary"
                             onClick={() => router.push("/recipe/new")}
+                            icon={PlusIcon}
                         >
                             Neues Rezept
                         </Button>

@@ -14,7 +14,15 @@ const InstructionsForm = () => {
 
     return (
         <div>
-            <h2 className="mt-8 mb-2 text-xl">Zubereitung</h2>
+            <div className="mb-6 mt-6">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Zubereitung
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                    Hier kannst du alle Schritte zur Zubereitung deines Rezeptes
+                    angeben
+                </p>
+            </div>
 
             {fields.length > 0 && (
                 <div className="mb-6 grid grid-cols-instructionsForm items-center gap-x-6 gap-y-3">

@@ -47,7 +47,7 @@ const NewRecipePage = () => {
                         </Button>
                     </div>
 
-                    <div className="flex flex-col gap-6">
+                    <div className="flex w-full max-w-3xl flex-col space-y-8 divide-y divide-gray-200">
                         <GeneralRecipeForm />
                         <IngredientsForm />
                         <InstructionsForm />

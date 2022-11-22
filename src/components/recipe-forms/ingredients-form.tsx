@@ -26,7 +26,14 @@ const IngredientsForm = () => {
 
     return (
         <div>
-            <h2 className="mt-8 mb-2 text-xl">Zutaten</h2>
+            <div className="mb-6 mt-6">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Zutaten
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                    Gib hier alle Zutaten an die für dein Rezept benötigt werden
+                </p>
+            </div>
 
             <div className="mb-8 flex flex-row items-center">
                 <span className="mr-4">Zutaten für:</span>
