@@ -1,11 +1,8 @@
-import { CreateRecipeType } from "@/utils/validators";
+import type { CreateRecipeInputType } from "@/utils/validators";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { Ingredient, Unit } from "@prisma/client";
-import {
-    Controller,
-    UseFieldArrayRemove,
-    useFormContext
-} from "react-hook-form";
+import type { Ingredient, Unit } from "@prisma/client";
+import type { UseFieldArrayRemove } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../common/form-error";
 import Input from "../common/input";
 import Select from "../common/select";
@@ -24,7 +21,7 @@ const IngredientsFormLine = (props: Props) => {
         control,
         register,
         formState: { errors }
-    } = useFormContext<CreateRecipeType>();
+    } = useFormContext<CreateRecipeInputType>();
 
     return (
         <>

@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from "react";
-import { PlusSmallIcon } from "@heroicons/react/20/solid";
+import React from "react";
+import type { PropsWithChildren } from "react";
+import type { PlusSmallIcon } from "@heroicons/react/20/solid";
 
 interface Props {
     onClick: () => void;
@@ -12,7 +13,7 @@ const Link = ({ children, onClick, icon }: PropsWithChildren<Props>) => {
     return (
         <a
             onClick={onClick}
-            className="flex cursor-pointer flex-row items-center text-xs text-yellow-800"
+            className="flex cursor-pointer flex-row items-center text-xs text-indigo-500"
         >
             {Icon && <Icon className="mr-1 h-3 w-3" />}
             <span>{children}</span>

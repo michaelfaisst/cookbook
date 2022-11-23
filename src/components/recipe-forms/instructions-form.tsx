@@ -46,7 +46,6 @@ const InstructionsForm = () => {
             )}
 
             <Button
-                className="w-48"
                 onClick={() =>
                     append({
                         instruction: ""

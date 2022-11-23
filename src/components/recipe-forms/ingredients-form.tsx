@@ -1,5 +1,5 @@
 import { trpc } from "@/utils/trpc";
-import { CreateRecipeType } from "@/utils/validators";
+import type { CreateRecipeInputType } from "@/utils/validators";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
@@ -12,7 +12,7 @@ import CreateUnitModal from "../modals/create-unit";
 import IngredientsFormLine from "./ingredients-form-line";
 
 const IngredientsForm = () => {
-    const { control, register } = useFormContext<CreateRecipeType>();
+    const { control, register } = useFormContext<CreateRecipeInputType>();
     const { data: ingredients } = trpc.ingredients.getIngredients.useQuery();
     const { data: units } = trpc.units.getUnits.useQuery();
 
@@ -86,7 +86,13 @@ const IngredientsForm = () => {
                 </div>
             )}
 
-            <Button className="w-48" onClick={() => append({} as any)}>
+            <Button
+                onClick={() =>
+                    append({
+                        ingredientId: ""
+                    })
+                }
+            >
                 Zutat hinzufügen
             </Button>
 

@@ -21,7 +21,7 @@ const Loading = ({ size = 32, className }: Props) => {
                         dur="1.2s"
                         repeatCount="indefinite"
                         begin="0"
-                        keytimes="0;0.2;0.7;1"
+                        keyTimes="0;0.2;0.7;1"
                         keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8"
                         calcMode="spline"
                     />
@@ -33,7 +33,7 @@ const Loading = ({ size = 32, className }: Props) => {
                         dur="1.2s"
                         repeatCount="indefinite"
                         begin="0.3"
-                        keytimes="0;0.2;0.7;1"
+                        keyTimes="0;0.2;0.7;1"
                         keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8"
                         calcMode="spline"
                     />
@@ -45,7 +45,7 @@ const Loading = ({ size = 32, className }: Props) => {
                         dur="1.2s"
                         repeatCount="indefinite"
                         begin="0.6"
-                        keytimes="0;0.2;0.7;1"
+                        keyTimes="0;0.2;0.7;1"
                         keySplines="0.2 0.2 0.4 0.8;0.2 0.6 0.4 0.8;0.2 0.6 0.4 0.8"
                         calcMode="spline"
                     />

@@ -1,4 +1,5 @@
-import React, { HTMLProps } from "react";
+import React from "react";
+import type { HTMLProps } from "react";
 
 interface Props extends HTMLProps<HTMLInputElement> {
     error?: string;
@@ -21,6 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
             <input
                 ref={ref}
                 className={classes}
+                autoComplete="off"
                 {...restProps}
                 aria-invalid={error ? "true" : "false"}
             />
@@ -28,4 +30,5 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     }
 );
 
+Input.displayName = "Input";
 export default Input;

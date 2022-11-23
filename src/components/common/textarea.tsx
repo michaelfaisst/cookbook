@@ -1,17 +1,22 @@
-import React, { HTMLProps } from "react";
+import React from "react";
+import type { HTMLProps } from "react";
+import { classNames } from "@/utils";
 
-interface Props extends HTMLProps<HTMLTextAreaElement> {}
+const TextArea = React.forwardRef<
+    HTMLTextAreaElement,
+    HTMLProps<HTMLTextAreaElement>
+>(({ className, ...restProps }, ref) => {
+    return (
+        <textarea
+            ref={ref}
+            className={classNames(
+                "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500",
+                className
+            )}
+            {...restProps}
+        />
+    );
+});
 
-const TextArea = React.forwardRef<HTMLTextAreaElement, Props>(
-    ({ className, ...restProps }, ref) => {
-        return (
-            <textarea
-                ref={ref}
-                className="block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                {...restProps}
-            />
-        );
-    }
-);
-
+TextArea.displayName = "TextArea";
 export default TextArea;

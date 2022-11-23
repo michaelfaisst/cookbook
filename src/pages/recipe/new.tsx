@@ -4,16 +4,16 @@ import GeneralRecipeForm from "@/components/recipe-forms/general-form";
 import IngredientsForm from "@/components/recipe-forms/ingredients-form";
 import InstructionsForm from "@/components/recipe-forms/instructions-form";
 import { trpc } from "@/utils/trpc";
-import type { CreateRecipeType } from "@/utils/validators";
-import { createRecipeSchema } from "@/utils/validators";
+import type { CreateRecipeInputType } from "@/utils/validators";
+import { createRecipeInputSchema } from "@/utils/validators";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
 const NewRecipePage = () => {
-    const formMethods = useForm<CreateRecipeType>({
-        resolver: zodResolver(createRecipeSchema),
+    const formMethods = useForm<CreateRecipeInputType>({
+        resolver: zodResolver(createRecipeInputSchema),
         defaultValues: {
             name: "Neues Rezept",
             prepTime: 0,
@@ -26,7 +26,7 @@ const NewRecipePage = () => {
 
     const router = useRouter();
 
-    const onSubmit = async (data: CreateRecipeType) => {
+    const onSubmit = async (data: CreateRecipeInputType) => {
         await saveRecipeMutation.mutateAsync(data, {
             onSuccess: (data) => {
                 router.push(`/recipe/${data.id}`);

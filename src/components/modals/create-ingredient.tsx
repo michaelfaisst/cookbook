@@ -1,13 +1,9 @@
 import { trpc } from "@/utils/trpc";
-import {
-    createIngredientSchema,
-    CreateIngredientType,
-    createUnitSchema,
-    CreateUnitType
-} from "@/utils/validators";
+import { createIngredientInputSchema } from "@/utils/validators";
+import type { CreateIngredientInputType } from "@/utils/validators";
 import { Dialog } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BaseSyntheticEvent } from "react";
+import type { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
@@ -22,16 +18,17 @@ interface Props {
 const CreateIngredientModal = (props: Props) => {
     const { open, onClose } = props;
 
-    const { handleSubmit, register, reset } = useForm<CreateIngredientType>({
-        resolver: zodResolver(createIngredientSchema)
-    });
+    const { handleSubmit, register, reset } =
+        useForm<CreateIngredientInputType>({
+            resolver: zodResolver(createIngredientInputSchema)
+        });
 
     const trpcUtils = trpc.useContext();
     const createIngredientMutation =
         trpc.ingredients.createIngredient.useMutation();
 
     const onSubmit = (
-        data: CreateIngredientType,
+        data: CreateIngredientInputType,
         event?: BaseSyntheticEvent
     ) => {
         event?.preventDefault();

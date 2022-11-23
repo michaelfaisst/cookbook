@@ -2,6 +2,7 @@ import Button from "@/components/common/button";
 import Loading from "@/components/common/loading";
 import Layout from "@/components/layout";
 import { trpc } from "@/utils/trpc";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -24,7 +25,14 @@ const RecipePage = () => {
     return (
         <Layout>
             {recipe.image && (
-                <img className="w-96 rounded-lg" src={recipe.image} />
+                <div className="relative h-96 w-full">
+                    <Image
+                        src={recipe.image}
+                        fill
+                        alt={recipe.name}
+                        className="rounded-lg object-cover"
+                    />
+                </div>
             )}
 
             <div className="flex flex-row justify-between py-5">

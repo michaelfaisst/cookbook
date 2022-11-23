@@ -1,8 +1,9 @@
 import { trpc } from "@/utils/trpc";
-import { createUnitSchema, CreateUnitType } from "@/utils/validators";
+import type { CreateUnitInputType } from "@/utils/validators";
+import { createUnitInputSchema } from "@/utils/validators";
 import { Dialog } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { BaseSyntheticEvent } from "react";
+import type { BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
@@ -17,14 +18,17 @@ interface Props {
 const CreateUnitModal = (props: Props) => {
     const { open, onClose } = props;
 
-    const { handleSubmit, register, reset } = useForm<CreateUnitType>({
-        resolver: zodResolver(createUnitSchema)
+    const { handleSubmit, register, reset } = useForm<CreateUnitInputType>({
+        resolver: zodResolver(createUnitInputSchema)
     });
 
     const trpcUtils = trpc.useContext();
     const createUnitMutation = trpc.units.createUnit.useMutation();
 
-    const onSubmit = (data: CreateUnitType, event?: BaseSyntheticEvent) => {
+    const onSubmit = (
+        data: CreateUnitInputType,
+        event?: BaseSyntheticEvent
+    ) => {
         event?.preventDefault();
         event?.stopPropagation();
 

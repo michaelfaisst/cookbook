@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createRecipeSchema = z.object({
+export const createRecipeInputSchema = z.object({
     name: z.string().min(1),
     description: z.string().optional(),
     prepTime: z.number().min(0),
@@ -22,14 +22,21 @@ export const createRecipeSchema = z.object({
     )
 });
 
-export const createUnitSchema = z.object({
+export const getRecipeInputSchema = z.object({
+    id: z.string().min(1)
+});
+
+export const createUnitInputSchema = z.object({
     name: z.string().min(1)
 });
 
-export const createIngredientSchema = z.object({
+export const createIngredientInputSchema = z.object({
     name: z.string().min(1)
 });
 
-export type CreateRecipeType = z.infer<typeof createRecipeSchema>;
-export type CreateUnitType = z.infer<typeof createUnitSchema>;
-export type CreateIngredientType = z.infer<typeof createIngredientSchema>;
+export type CreateRecipeInputType = z.infer<typeof createRecipeInputSchema>;
+export type CreateUnitInputType = z.infer<typeof createUnitInputSchema>;
+export type CreateIngredientInputType = z.infer<
+    typeof createIngredientInputSchema
+>;
+export type GetRecipeInputType = z.infer<typeof getRecipeInputSchema>;

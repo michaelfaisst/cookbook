@@ -1,8 +1,9 @@
-import { RecipeListOutput } from "@/utils/types";
+import type { RecipeListOutput } from "@/utils/types";
 import { format } from "date-fns";
 import Link from "next/link";
 import React from "react";
 import { ClockIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 interface Props {
     recipe: RecipeListOutput;
@@ -14,11 +15,14 @@ const RecipeCard = (props: Props) => {
     return (
         <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
             <Link href={`/recipe/${recipe.id}`} className="flex-shrink-0">
-                <img
-                    className="h-48 w-full object-cover"
-                    src={recipe.image || undefined}
-                    alt={recipe.name}
-                />
+                <div className="relative h-48 w-full">
+                    <Image
+                        fill
+                        className="object-cover"
+                        src={recipe.image || ""}
+                        alt={recipe.name}
+                    />
+                </div>
             </Link>
 
             <div className="flex flex-1 flex-col justify-between bg-white p-6">
@@ -39,7 +43,10 @@ const RecipeCard = (props: Props) => {
                 </div>
                 <div className="mt-6 flex items-center">
                     <div className="flex-shrink-0">
-                        <img
+                        <Image
+                            width={40}
+                            height={40}
+                            alt={recipe.createdBy.name || "Recipe Author Image"}
                             className="h-10 w-10 rounded-full"
                             src={recipe.createdBy.image || ""}
                         />

@@ -1,7 +1,6 @@
 import { trpc } from "@/utils/trpc";
-import { CreateRecipeType } from "@/utils/validators";
-import { Category } from "@prisma/client";
-import React, { Fragment } from "react";
+import type { CreateRecipeInputType } from "@/utils/validators";
+import type { Category } from "@prisma/client";
 import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../common/form-error";
 import Input from "../common/input";
@@ -14,7 +13,7 @@ const GeneralRecipeForm = () => {
         register,
         formState: { errors },
         control
-    } = useFormContext<CreateRecipeType>();
+    } = useFormContext<CreateRecipeInputType>();
 
     const { data: categories } = trpc.categories.getCategories.useQuery();
 
