@@ -9,6 +9,7 @@ const TextArea = React.forwardRef<
     return (
         <textarea
             ref={ref}
+            rows={5}
             className={classNames(
                 "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500",
                 className

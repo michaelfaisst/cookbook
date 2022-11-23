@@ -1,9 +1,12 @@
+import { classNames } from "@/utils";
+import { faUserChef } from "@fortawesome/pro-light-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { classNames } from "@/utils";
 import Button from "./common/button";
+import Input from "./common/input";
 
 const Header = () => {
     const { data: session, status } = useSession();
@@ -19,7 +22,7 @@ const Header = () => {
 
         return (
             <div onClick={() => signOut()} className="flex items-center gap-3">
-                <span className="text-sm font-medium text-gray-500">
+                <span className=" whitespace-nowrap text-sm font-medium text-gray-500">
                     {session.user?.name}
                 </span>
                 <Image
@@ -34,12 +37,15 @@ const Header = () => {
     };
 
     return (
-        <div className="border-b border-gray-200 bg-white">
-            <div className="mx-auto max-w-7xl px-4">
-                <div className="flex h-16 justify-between">
+        <div className="bg-white shadow-sm">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div className="relative flex h-16 justify-between">
                     <div className="flex">
                         <div className="flex items-center">
-                            <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
+                            <FontAwesomeIcon
+                                icon={faUserChef}
+                                className="h-6 font-bold text-indigo-500"
+                            />
                         </div>
 
                         <div className="ml-12 flex space-x-8">
@@ -54,30 +60,19 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex items-center">{renderUser()}</div>
+                    <div className="flex flex-row items-center">
+                        <div className="mr-10">
+                            <Input
+                                placeholder="Suche"
+                                icon={MagnifyingGlassIcon}
+                            />
+                        </div>
+                        {renderUser()}
+                    </div>
                 </div>
             </div>
         </div>
     );
-
-    // return (
-    //     <div className="flex flex-row justify-center bg-gray-900 p-2">
-    //         <div className="flex w-full max-w-7xl flex-row items-center justify-between">
-    //             <div>
-    //                 <FontAwesomeIcon
-    //                     icon={faSearch}
-    //                     className="text-lg text-white"
-    //                 />
-    //             </div>
-    //             <div>
-    //                 <Link href="/" className="text-white">
-    //                     Rezepte
-    //                 </Link>
-    //             </div>
-    //             {renderUser()}
-    //         </div>
-    //     </div>
-    // );
 };
 
 export default Header;

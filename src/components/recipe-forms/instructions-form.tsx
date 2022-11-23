@@ -13,8 +13,8 @@ const InstructionsForm = () => {
     });
 
     return (
-        <div>
-            <div className="mb-6 mt-6">
+        <>
+            <div className="mb-6">
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Zubereitung
                 </h3>
@@ -54,7 +54,7 @@ const InstructionsForm = () => {
             >
                 Schritt hinzufügen
             </Button>
-        </div>
+        </>
     );
 };
 

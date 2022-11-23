@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/router";
 import { FormProvider, useForm } from "react-hook-form";
 import { CheckIcon } from "@heroicons/react/24/outline";
+import Content from "@/components/content";
 
 const NewRecipePage = () => {
     const formMethods = useForm<CreateRecipeInputType>({
@@ -36,24 +37,38 @@ const NewRecipePage = () => {
 
     return (
         <Layout>
-            <FormProvider {...formMethods}>
-                <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-                    <div className="mb-10 flex flex-row items-center justify-between">
-                        <h1 className="text-2xl font-bold leading-7 text-gray-900">
-                            Neues Rezept
-                        </h1>
-                        <Button mode="primary" type="submit" icon={CheckIcon}>
-                            Speichern
-                        </Button>
-                    </div>
+            <Content>
+                <FormProvider {...formMethods}>
+                    <form onSubmit={formMethods.handleSubmit(onSubmit)}>
+                        <div className="mb-10 flex flex-col justify-between sm:flex-row sm:items-center">
+                            <h1 className="mb-4 text-3xl font-bold leading-7 text-gray-900 sm:mb-0">
+                                Neues Rezept
+                            </h1>
+                            <div>
+                                <Button
+                                    mode="primary"
+                                    type="submit"
+                                    icon={CheckIcon}
+                                >
+                                    Speichern
+                                </Button>
+                            </div>
+                        </div>
 
-                    <div className="flex w-full max-w-3xl flex-col space-y-8 divide-y divide-gray-200">
-                        <GeneralRecipeForm />
-                        <IngredientsForm />
-                        <InstructionsForm />
-                    </div>
-                </form>
-            </FormProvider>
+                        <div className="flex w-full max-w-3xl flex-col space-y-8">
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <GeneralRecipeForm />
+                            </div>
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <IngredientsForm />
+                            </div>
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <InstructionsForm />
+                            </div>
+                        </div>
+                    </form>
+                </FormProvider>
+            </Content>
         </Layout>
     );
 };

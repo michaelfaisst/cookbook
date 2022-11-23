@@ -1,6 +1,7 @@
 import Button from "@/components/common/button";
 import Loading from "@/components/common/loading";
 import Notification from "@/components/common/notification";
+import Content from "@/components/content";
 import Layout from "@/components/layout";
 import GeneralRecipeForm from "@/components/recipe-forms/general-form";
 import IngredientsForm from "@/components/recipe-forms/ingredients-form";
@@ -36,6 +37,8 @@ const NewRecipePage = () => {
             return;
         }
 
+        console.log(data);
+
         await updateRecipeMutation.mutateAsync(
             {
                 ...data,
@@ -63,36 +66,46 @@ const NewRecipePage = () => {
     if (!recipe || isLoading) {
         return (
             <Layout>
-                <Loading className="flex h-full flex-1 items-center justify-center bg-gray-50" />
+                <Content>
+                    <Loading className="flex h-full flex-1 items-center justify-center bg-gray-50" />
+                </Content>
             </Layout>
         );
     }
 
     return (
         <Layout>
-            <FormProvider {...formMethods}>
-                <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-                    <div className="mb-10 flex flex-row items-center justify-between">
-                        <h1 className="text-2xl font-bold leading-7 text-gray-900">
-                            {recipeTitle}
-                        </h1>
-                        <Button
-                            loading={updateRecipeMutation.isLoading}
-                            mode="primary"
-                            type="submit"
-                            icon={CheckIcon}
-                        >
-                            Speichern
-                        </Button>
-                    </div>
+            <Content>
+                <FormProvider {...formMethods}>
+                    <form onSubmit={formMethods.handleSubmit(onSubmit)}>
+                        <div className="mb-10 flex flex-row items-center justify-between">
+                            <h1 className="text-3xl font-bold leading-7 text-gray-900">
+                                {recipeTitle}
+                            </h1>
+                            <Button
+                                loading={updateRecipeMutation.isLoading}
+                                mode="primary"
+                                type="submit"
+                                icon={CheckIcon}
+                            >
+                                Speichern
+                            </Button>
+                        </div>
 
-                    <div className="flex w-full max-w-3xl flex-col space-y-8 divide-y divide-gray-200">
-                        <GeneralRecipeForm />
-                        <IngredientsForm />
-                        <InstructionsForm />
-                    </div>
-                </form>
-            </FormProvider>
+                        <div className="flex w-full max-w-3xl flex-col space-y-8">
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <GeneralRecipeForm />
+                            </div>
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <IngredientsForm />
+                            </div>
+                            <div className="rounded-lg bg-white p-6 shadow">
+                                <InstructionsForm />
+                            </div>
+                        </div>
+                    </form>
+                </FormProvider>
+            </Content>
         </Layout>
     );
 };

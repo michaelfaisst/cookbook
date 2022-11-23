@@ -18,7 +18,7 @@ const GeneralRecipeForm = () => {
     const { data: categories } = trpc.categories.getCategories.useQuery();
 
     return (
-        <div>
+        <>
             <div className="mb-6">
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Allgemeine Information
@@ -65,7 +65,7 @@ const GeneralRecipeForm = () => {
                 <FormError error={errors.categoryId?.message} />
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                 <div>
                     <Label>Vorbereitungszeit</Label>
                     <div className="flex flex-row items-center gap-2">
@@ -116,7 +116,7 @@ const GeneralRecipeForm = () => {
                     <FormError error={errors.chillTime?.message} />
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

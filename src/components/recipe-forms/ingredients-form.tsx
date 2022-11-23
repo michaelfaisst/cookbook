@@ -25,8 +25,8 @@ const IngredientsForm = () => {
     const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
 
     return (
-        <div>
-            <div className="mb-6 mt-6">
+        <>
+            <div className="mb-6">
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Zutaten
                 </h3>
@@ -105,7 +105,7 @@ const IngredientsForm = () => {
                 open={ingredientModalOpen}
                 onClose={() => setIngredientModalOpen(false)}
             />
-        </div>
+        </>
     );
 };
 

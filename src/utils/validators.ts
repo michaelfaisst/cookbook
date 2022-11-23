@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const createRecipeInputSchema = z.object({
     name: z.string().min(1),
-    description: z.string().optional(),
+    description: z.string().nullable().optional(),
     prepTime: z.number().min(0),
     cookTime: z.number().min(0),
     chillTime: z.number().min(0),
@@ -10,15 +10,15 @@ export const createRecipeInputSchema = z.object({
     categoryId: z.string().cuid(),
     ingredients: z.array(
         z.object({
-            id: z.string().cuid().optional(),
-            amount: z.number().min(0).optional(),
+            id: z.string().cuid().nullable().optional(),
+            amount: z.number().min(0).nullable().optional(),
             ingredientId: z.string().cuid(),
-            unitId: z.string().cuid().optional()
+            unitId: z.string().cuid().nullable().optional()
         })
     ),
     instructions: z.array(
         z.object({
-            id: z.string().cuid().optional(),
+            id: z.string().cuid().nullable().optional(),
             instruction: z.string()
         })
     )

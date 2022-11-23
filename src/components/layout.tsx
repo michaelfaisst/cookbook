@@ -19,7 +19,6 @@ const Layout = (props: PropsWithChildren) => {
                 animate="enter"
                 exit="exit"
                 transition={{ type: "linear" }}
-                className="m-auto flex w-full max-w-7xl flex-1 flex-grow flex-col py-10 px-4"
             >
                 {props.children}
             </motion.main>
