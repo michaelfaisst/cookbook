@@ -1,22 +1,18 @@
 import { trpc } from "@/utils/trpc";
 import type { CreateUnitInputType } from "@/utils/validators";
 import { createUnitInputSchema } from "@/utils/validators";
-import { Dialog } from "@headlessui/react";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
+import { Dialog, Transition } from "@headlessui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { BaseSyntheticEvent } from "react";
+import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
 import Label from "../common/label";
 import Link from "../common/link";
 
-interface Props {
-    open: boolean;
-    onClose: () => void;
-}
-
-const CreateUnitModal = (props: Props) => {
-    const { open, onClose } = props;
+const CreateUnitModal = NiceModal.create(() => {
+    const modal = useModal();
 
     const { handleSubmit, register, reset } = useForm<CreateUnitInputType>({
         resolver: zodResolver(createUnitInputSchema)
@@ -25,51 +21,85 @@ const CreateUnitModal = (props: Props) => {
     const trpcUtils = trpc.useContext();
     const createUnitMutation = trpc.units.createUnit.useMutation();
 
-    const onSubmit = (
-        data: CreateUnitInputType,
-        event?: BaseSyntheticEvent
-    ) => {
-        event?.preventDefault();
-        event?.stopPropagation();
-
-        createUnitMutation.mutateAsync(data, {
+    const onSubmit = async (data: CreateUnitInputType) => {
+        await createUnitMutation.mutateAsync(data, {
             onSuccess: () => {
                 trpcUtils.units.getUnits.invalidate();
                 reset();
-                onClose();
+                modal.remove();
             }
         });
     };
 
     return (
-        <Dialog open={open} onClose={onClose} className="relative z-50">
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-            <div className="fixed inset-0 flex items-center justify-center p-4">
-                <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white p-8">
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <Dialog.Title className="text-xl">
-                            Einheit erstellen
-                        </Dialog.Title>
+        <Transition show={modal.visible} as={Fragment}>
+            <Dialog
+                open={modal.visible}
+                onClose={modal.remove}
+                className="relative z-50"
+            >
+                <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <div
+                        className="fixed inset-0 bg-black/30"
+                        aria-hidden="true"
+                    />
+                </Transition.Child>
 
-                        <div className="p-3" />
+                <Transition.Child
+                    as={Fragment}
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 scale-95"
+                    enterTo="opacity-100 scale-100"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 scale-100"
+                    leaveTo="opacity-0 scale-95"
+                >
+                    <div className="fixed inset-0 flex items-center justify-center p-4">
+                        <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white p-8">
+                            <form
+                                id="createIngredientForm"
+                                onSubmit={handleSubmit(onSubmit)}
+                            >
+                                <Dialog.Title className="text-xl">
+                                    Einheit erstellen
+                                </Dialog.Title>
 
-                        <Label>Name</Label>
-                        <Input {...register("name")} />
+                                <div className="p-3" />
 
-                        <div className="p-4" />
+                                <Label>Name</Label>
+                                <Input {...register("name")} />
 
-                        <div className="flex flex-row justify-between">
-                            <Link onClick={onClose}>Abbrechen</Link>
+                                <div className="p-4" />
 
-                            <Button className="bg-white" type="submit">
-                                Speichern
-                            </Button>
-                        </div>
-                    </form>
-                </Dialog.Panel>
-            </div>
-        </Dialog>
+                                <div className="flex flex-row justify-between">
+                                    <Link onClick={modal.remove}>
+                                        Abbrechen
+                                    </Link>
+
+                                    <Button
+                                        form="createIngredientForm"
+                                        className="bg-white"
+                                        type="submit"
+                                        loading={createUnitMutation.isLoading}
+                                    >
+                                        Speichern
+                                    </Button>
+                                </div>
+                            </form>
+                        </Dialog.Panel>
+                    </div>
+                </Transition.Child>
+            </Dialog>
+        </Transition>
     );
-};
+});
 
 export default CreateUnitModal;

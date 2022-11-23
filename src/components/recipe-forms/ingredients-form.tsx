@@ -1,7 +1,7 @@
 import { trpc } from "@/utils/trpc";
 import type { CreateRecipeInputType } from "@/utils/validators";
+import NiceModal from "@ebay/nice-modal-react";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import Button from "../common/button";
 import Input from "../common/input";
@@ -20,9 +20,6 @@ const IngredientsForm = () => {
         control,
         name: "ingredients"
     });
-
-    const [unitModalOpen, setUnitModalOpen] = useState(false);
-    const [ingredientModalOpen, setIngredientModalOpen] = useState(false);
 
     return (
         <>
@@ -56,7 +53,7 @@ const IngredientsForm = () => {
                         <Label className="mb-0">Einheit</Label>
                         <Link
                             icon={PlusIcon}
-                            onClick={() => setUnitModalOpen(true)}
+                            onClick={() => NiceModal.show(CreateUnitModal)}
                         >
                             Erstellen
                         </Link>
@@ -66,7 +63,9 @@ const IngredientsForm = () => {
                         <Label className="mb-0">Zutat</Label>
                         <Link
                             icon={PlusIcon}
-                            onClick={() => setIngredientModalOpen(true)}
+                            onClick={() =>
+                                NiceModal.show(CreateIngredientModal)
+                            }
                         >
                             Erstellen
                         </Link>
@@ -95,16 +94,6 @@ const IngredientsForm = () => {
             >
                 Zutat hinzufügen
             </Button>
-
-            <CreateUnitModal
-                open={unitModalOpen}
-                onClose={() => setUnitModalOpen(false)}
-            />
-
-            <CreateIngredientModal
-                open={ingredientModalOpen}
-                onClose={() => setIngredientModalOpen(false)}
-            />
         </>
     );
 };

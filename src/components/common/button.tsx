@@ -32,6 +32,7 @@ const Button = ({
                     : "",
                 className
             )}
+            disabled={loading}
             {...restProps}
         >
             <div

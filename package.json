@@ -10,7 +10,11 @@
         "start": "next start",
         "create:units": "ts-node -O '{\"module\":\"commonjs\"}' ./scripts/create-units.ts"
     },
+    "prisma": {
+        "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    },
     "dependencies": {
+        "@ebay/nice-modal-react": "1.2.8",
         "@fortawesome/fontawesome-svg-core": "6.2.1",
         "@fortawesome/pro-light-svg-icons": "6.2.1",
         "@fortawesome/react-fontawesome": "0.2.0",
