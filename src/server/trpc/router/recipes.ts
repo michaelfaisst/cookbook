@@ -6,8 +6,6 @@ import {
 } from "@/utils/validators";
 import type { Context } from "../context";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
-import { differenceBy, intersectionBy } from "lodash";
-import { getChangedListData } from "@/server/common/utils";
 import { TRPCError } from "@trpc/server";
 
 const getRecipes = () => {
