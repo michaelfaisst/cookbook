@@ -10,6 +10,7 @@ export const createRecipeInputSchema = z.object({
     categoryId: z.string().cuid(),
     ingredients: z.array(
         z.object({
+            id: z.string().cuid().optional(),
             amount: z.number().min(0).optional(),
             ingredientId: z.string().cuid(),
             unitId: z.string().cuid().optional()
@@ -17,9 +18,14 @@ export const createRecipeInputSchema = z.object({
     ),
     instructions: z.array(
         z.object({
+            id: z.string().cuid().optional(),
             instruction: z.string()
         })
     )
+});
+
+export const updateRecipeInputSchema = createRecipeInputSchema.extend({
+    id: z.string().cuid()
 });
 
 export const getRecipeInputSchema = z.object({
@@ -40,3 +46,4 @@ export type CreateIngredientInputType = z.infer<
     typeof createIngredientInputSchema
 >;
 export type GetRecipeInputType = z.infer<typeof getRecipeInputSchema>;
+export type UpdateRecipeInputType = z.infer<typeof updateRecipeInputSchema>;

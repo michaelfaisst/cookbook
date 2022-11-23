@@ -1,13 +1,18 @@
 interface Props {
     size?: number;
     className?: string;
+    fillClassName?: string;
 }
 
-const Loading = ({ size = 32, className }: Props) => {
+const Loading = ({
+    size = 32,
+    className,
+    fillClassName = "fill-indigo-500"
+}: Props) => {
     return (
         <div className={className}>
             <svg
-                className="fill-indigo-500"
+                className={fillClassName}
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 32 32"
                 width={size}

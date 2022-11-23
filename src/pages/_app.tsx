@@ -8,6 +8,7 @@ import { Inter } from "@next/font/google";
 import { trpc } from "@/utils/trpc";
 import "../styles/globals.css";
 import { AnimatePresence } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 config.autoAddCss = false;
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +24,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
                     <Component {...pageProps} />
                 </AnimatePresence>
             </SessionProvider>
+            <Toaster position="bottom-right" />
         </main>
     );
 };
