@@ -39,16 +39,18 @@ const Header = () => {
     return (
         <div className="bg-white shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 justify-between">
+                <div className="relative flex h-16 gap-4 sm:justify-between">
                     <div className="flex">
                         <div className="flex items-center">
-                            <FontAwesomeIcon
-                                icon={faUserChef}
-                                className="h-6 font-bold text-indigo-500"
-                            />
+                            <Link href="/">
+                                <FontAwesomeIcon
+                                    icon={faUserChef}
+                                    className="h-6 font-bold text-indigo-500"
+                                />
+                            </Link>
                         </div>
 
-                        <div className="ml-12 flex space-x-8">
+                        <div className="ml-12 hidden space-x-8 sm:flex">
                             <Link
                                 href="/"
                                 className={classNames(
@@ -60,14 +62,14 @@ const Header = () => {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex flex-row items-center">
-                        <div className="mr-10">
+                    <div className="flex flex-1 flex-row items-center sm:flex-initial">
+                        <div className="flex-1 sm:mr-10">
                             <Input
                                 placeholder="Suche"
                                 icon={MagnifyingGlassIcon}
                             />
                         </div>
-                        {renderUser()}
+                        <div className="hidden sm:block">{renderUser()}</div>
                     </div>
                 </div>
             </div>

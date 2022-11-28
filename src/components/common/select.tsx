@@ -3,11 +3,11 @@ import { Combobox } from "@headlessui/react";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 interface Props<TVal, T> {
-    value?: TVal;
+    value?: TVal | null;
     data: T[];
     keyProp: (obj: T) => string | number;
     valueProp: (obj: T) => TVal;
-    onChange: (selected?: TVal) => void;
+    onChange: (selected: TVal | null) => void;
     renderInputValue: (obj: T) => string;
     renderOption: (obj: T) => string;
     filter: (query: string, obj: T) => boolean;
@@ -39,11 +39,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
     }
 
     return (
-        <Combobox
-            value={value}
-            onChange={(e) => onChange(e || undefined)}
-            nullable
-        >
+        <Combobox value={value} onChange={(e) => onChange(e || null)} nullable>
             <div className="relative">
                 <div className="relative block w-full cursor-default rounded-lg bg-white focus:border-blue-500 focus:ring-blue-500">
                     <Combobox.Input

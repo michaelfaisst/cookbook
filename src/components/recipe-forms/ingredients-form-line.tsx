@@ -32,7 +32,7 @@ const IngredientsFormLine = (props: Props) => {
                     {...register(`ingredients.${index}.amount`, {
                         setValueAs: (value) => {
                             const num = parseFloat(value);
-                            return isNaN(num) ? undefined : num;
+                            return isNaN(num) ? null : num;
                         }
                     })}
                     error={errors.ingredients?.[index]?.amount?.message}

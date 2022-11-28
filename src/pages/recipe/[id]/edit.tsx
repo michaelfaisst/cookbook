@@ -37,8 +37,6 @@ const NewRecipePage = () => {
             return;
         }
 
-        console.log(data);
-
         await updateRecipeMutation.mutateAsync(
             {
                 ...data,
@@ -78,18 +76,20 @@ const NewRecipePage = () => {
             <Content>
                 <FormProvider {...formMethods}>
                     <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-                        <div className="mb-10 flex flex-row items-center justify-between">
-                            <h1 className="text-3xl font-bold leading-7 text-gray-900">
+                        <div className="mb-10 flex flex-col justify-between sm:flex-row sm:items-center">
+                            <h1 className="mb-4 text-3xl font-bold leading-7 text-gray-900 sm:mb-0">
                                 {recipeTitle}
                             </h1>
-                            <Button
-                                loading={updateRecipeMutation.isLoading}
-                                mode="primary"
-                                type="submit"
-                                icon={CheckIcon}
-                            >
-                                Speichern
-                            </Button>
+                            <div>
+                                <Button
+                                    loading={updateRecipeMutation.isLoading}
+                                    mode="primary"
+                                    type="submit"
+                                    icon={CheckIcon}
+                                >
+                                    Speichern
+                                </Button>
+                            </div>
                         </div>
 
                         <div className="flex w-full max-w-3xl flex-col space-y-8">

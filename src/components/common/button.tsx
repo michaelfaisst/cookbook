@@ -19,6 +19,7 @@ const Button = ({
     ...restProps
 }: Props) => {
     const Icon = icon;
+
     return (
         <button
             type="button"

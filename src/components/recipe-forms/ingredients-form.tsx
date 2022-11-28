@@ -88,7 +88,9 @@ const IngredientsForm = () => {
             <Button
                 onClick={() =>
                     append({
-                        ingredientId: ""
+                        ingredientId: "",
+                        amount: null,
+                        unitId: null
                     })
                 }
             >

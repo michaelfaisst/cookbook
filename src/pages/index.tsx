@@ -37,7 +37,7 @@ const Home: NextPage = () => {
                     )}
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
                     {data?.map((recipe) => (
                         <RecipeCard key={recipe.id} recipe={recipe} />
                     ))}

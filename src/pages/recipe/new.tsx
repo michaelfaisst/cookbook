@@ -25,6 +25,7 @@ const NewRecipePage = () => {
 
     const saveRecipeMutation = trpc.recipes.createRecipe.useMutation();
 
+    console.log(formMethods.formState.errors);
     const router = useRouter();
 
     const onSubmit = async (data: CreateRecipeInputType) => {

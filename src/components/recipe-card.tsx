@@ -19,7 +19,7 @@ const RecipeCard = (props: Props) => {
                     <Image
                         fill
                         className="object-cover"
-                        src={recipe.image || ""}
+                        src={recipe.image || "/images/placeholder.png"}
                         alt={recipe.name}
                     />
                 </div>
