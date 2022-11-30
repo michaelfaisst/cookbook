@@ -3,6 +3,7 @@ import type { CreateRecipeInputType } from "@/utils/validators";
 import type { Category } from "@prisma/client";
 import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../common/form-error";
+import ImageUpload from "../common/image-upload";
 import Input from "../common/input";
 import Label from "../common/label";
 import Select from "../common/select";
@@ -65,7 +66,7 @@ const GeneralRecipeForm = () => {
                 <FormError error={errors.categoryId?.message} />
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="mb-6 grid grid-cols-1 gap-6 sm:grid-cols-3">
                 <div>
                     <Label>Vorbereitungszeit</Label>
                     <div className="flex flex-row items-center gap-2">
@@ -115,6 +116,20 @@ const GeneralRecipeForm = () => {
                     </div>
                     <FormError error={errors.chillTime?.message} />
                 </div>
+            </div>
+
+            <div>
+                <Label>Bild</Label>
+                <Controller
+                    name="image"
+                    control={control}
+                    render={({ field }) => (
+                        <ImageUpload
+                            value={field.value}
+                            onChange={field.onChange}
+                        />
+                    )}
+                ></Controller>
             </div>
         </>
     );

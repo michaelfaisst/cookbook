@@ -8,6 +8,7 @@ export const createRecipeInputSchema = z.object({
     chillTime: z.number().min(0),
     servings: z.number().min(1),
     categoryId: z.string().cuid(),
+    image: z.string().nullable(),
     ingredients: z.array(
         z.object({
             id: z.string().cuid().optional(),
@@ -29,7 +30,7 @@ export const updateRecipeInputSchema = createRecipeInputSchema.extend({
 });
 
 export const getRecipeInputSchema = z.object({
-    id: z.string().min(1)
+    id: z.string().cuid()
 });
 
 export const createUnitInputSchema = z.object({
@@ -40,6 +41,10 @@ export const createIngredientInputSchema = z.object({
     name: z.string().min(1)
 });
 
+export const deleteRecipeInputSchema = z.object({
+    id: z.string().cuid()
+});
+
 export type CreateRecipeInputType = z.infer<typeof createRecipeInputSchema>;
 export type CreateUnitInputType = z.infer<typeof createUnitInputSchema>;
 export type CreateIngredientInputType = z.infer<
@@ -47,3 +52,4 @@ export type CreateIngredientInputType = z.infer<
 >;
 export type GetRecipeInputType = z.infer<typeof getRecipeInputSchema>;
 export type UpdateRecipeInputType = z.infer<typeof updateRecipeInputSchema>;
+export type DeleteRecipeInputType = z.infer<typeof deleteRecipeInputSchema>;

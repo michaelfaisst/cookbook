@@ -5,6 +5,7 @@ import Layout from "@/components/layout";
 import IngredientsView from "@/components/recipe-views/ingredients";
 import InstructionsView from "@/components/recipe-views/instructions";
 import { trpc } from "@/utils/trpc";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
@@ -16,6 +17,21 @@ const RecipePage = () => {
     const { data: recipe, isLoading } = trpc.recipes.getRecipe.useQuery({
         id: id as string
     });
+
+    const deleteRecipeMutation = trpc.recipes.deleteRecipe.useMutation();
+    const trpcHelper = trpc.useContext();
+
+    const deleteRecipe = async () => {
+        await deleteRecipeMutation.mutateAsync(
+            { id: id as string },
+            {
+                onSuccess: () => {
+                    trpcHelper.recipes.getRecipes.invalidate();
+                    router.push("/");
+                }
+            }
+        );
+    };
 
     if (!recipe || isLoading) {
         return (
@@ -46,12 +62,24 @@ const RecipePage = () => {
                         {recipe.name}
                     </h2>
                     {recipe.editable && (
-                        <Button
-                            mode="primary"
-                            onClick={() => router.push(`/recipe/${id}/edit`)}
-                        >
-                            Editieren
-                        </Button>
+                        <div className="flex flex-row gap-4">
+                            <Button
+                                icon={TrashIcon}
+                                onClick={deleteRecipe}
+                                loading={deleteRecipeMutation.isLoading}
+                            >
+                                Löschen
+                            </Button>
+                            <Button
+                                icon={PencilIcon}
+                                mode="primary"
+                                onClick={() =>
+                                    router.push(`/recipe/${id}/edit`)
+                                }
+                            >
+                                Editieren
+                            </Button>
+                        </div>
                     )}
                 </div>
                 <p className="mb-2">{recipe.description}</p>

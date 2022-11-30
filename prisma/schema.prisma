@@ -66,6 +66,7 @@ model Recipe {
   id          String  @id @default(cuid())
   name        String
   description String? @db.Text
+  imageId     String?
   image       String?
   prepTime    Int
   cookTime    Int

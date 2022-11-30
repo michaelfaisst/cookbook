@@ -17,6 +17,7 @@ const NewRecipePage = () => {
         resolver: zodResolver(createRecipeInputSchema),
         defaultValues: {
             name: "Neues Rezept",
+            image: null,
             prepTime: 0,
             cookTime: 0,
             chillTime: 0
@@ -24,8 +25,6 @@ const NewRecipePage = () => {
     });
 
     const saveRecipeMutation = trpc.recipes.createRecipe.useMutation();
-
-    console.log(formMethods.formState.errors);
     const router = useRouter();
 
     const onSubmit = async (data: CreateRecipeInputType) => {
@@ -50,6 +49,7 @@ const NewRecipePage = () => {
                                     mode="primary"
                                     type="submit"
                                     icon={CheckIcon}
+                                    loading={saveRecipeMutation.isLoading}
                                 >
                                     Speichern
                                 </Button>
