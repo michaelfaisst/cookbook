@@ -1,3 +1,4 @@
+import { getChangedListData } from "@/server/common/utils";
 import { prisma } from "@/server/db/client";
 import type {
     CreateRecipeInputType,
@@ -11,7 +12,11 @@ import {
 } from "@/utils/validators";
 import { TRPCError } from "@trpc/server";
 import type { User } from "next-auth";
-import { deleteImage, uploadImage } from "../../common/cloudinary";
+import {
+    deleteImage,
+    IUploadResult,
+    uploadImage
+} from "../../common/cloudinary";
 import type { Context } from "../context";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 
@@ -89,6 +94,16 @@ const updateRecipe = async (context: Context, input: UpdateRecipeInputType) => {
     }
 
     const { ingredients, instructions, ...restInput } = input;
+    let uploadImageResult: IUploadResult | undefined = undefined;
+
+    if (input.image && input.image !== recipe.image) {
+        if (recipe.imageId) {
+            deleteImage(recipe.imageId);
+        }
+
+        uploadImageResult = await uploadImage(input.image);
+    }
+
     const totalTime = input.prepTime + input.cookTime + input.chillTime;
 
     await prisma.recipe.update({
@@ -97,6 +112,8 @@ const updateRecipe = async (context: Context, input: UpdateRecipeInputType) => {
         },
         data: {
             ...restInput,
+            imageId: uploadImageResult?.id,
+            image: uploadImageResult?.url,
             totalTime,
             ingredients: {
                 deleteMany: {},

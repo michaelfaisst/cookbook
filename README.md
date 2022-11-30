@@ -8,20 +8,30 @@ We try to keep this project as simple as possible, so you can start with the mos
 
 If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-- [Next-Auth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [TailwindCSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+-   [Next-Auth.js](https://next-auth.js.org)
+-   [Prisma](https://prisma.io)
+-   [TailwindCSS](https://tailwindcss.com)
+-   [tRPC](https://trpc.io)
 
 We also [roll our own docs](https://beta.create.t3.gg) with some summary information and links to the respective documentation.
 
 Also checkout these awesome tutorials on `create-t3-app`.
 
-- [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
-- [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
-- [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
-- [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
+-   [Build a Blog With the T3 Stack - tRPC, TypeScript, Next.js, Prisma & Zod](https://www.youtube.com/watch?v=syEWlxVFUrY)
+-   [Build a Live Chat Application with the T3 Stack - TypeScript, Tailwind, tRPC](https://www.youtube.com/watch?v=dXRRY37MPuk)
+-   [Build a full stack app with create-t3-app](https://www.nexxel.dev/blog/ct3a-guestbook)
+-   [A first look at create-t3-app](https://dev.to/ajcwebdev/a-first-look-at-create-t3-app-1i8f)
 
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://beta.create.t3.gg/en/deployment/vercel) and [Docker](https://beta.create.t3.gg/en/deployment/docker) for more information.
+
+## Todo
+
+[] Upload images via seperate endpoint using formdata
+[] Making page responsive
+[] Adding ability in recipe view to change servings amount and update ingredient amounts on the fly
+[] Implement searching
+[] Make some nicer design
+[] Rewrite update recipe endpoint to not delete and recreate instructions and ingredients
+[] Add images to instructions
