@@ -45,7 +45,7 @@ const NewRecipePage = () => {
             {
                 onSuccess: (data) => {
                     trcpContext.recipes.getRecipe.setData(data, {
-                        id: data.id
+                        ...data
                     });
                     trcpContext.recipes.getRecipes.invalidate();
                     toast.custom((t) => (
