@@ -41,7 +41,7 @@ const ImageUpload = ({ value, onChange }: Props) => {
             ) : (
                 <p>Drag and drop some files here, or click to select files</p>
             )}
-            <img src={value} />
+            <img src={value || undefined} alt="Recipe image" />
         </div>
     );
 };
