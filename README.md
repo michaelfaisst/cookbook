@@ -28,6 +28,7 @@ Follow our deployment guides for [Vercel](https://beta.create.t3.gg/en/deploymen
 
 ## Todo
 
+[] Fix bug where selects are not prefilled when navigating to a edit page for the first time
 [] Upload images via seperate endpoint using formdata
 [] Making page responsive
 [] Adding ability in recipe view to change servings amount and update ingredient amounts on the fly
