@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import Image from "next/image";
 
 interface Props {
     value: string | null;
@@ -34,14 +35,25 @@ const ImageUpload = ({ value, onChange }: Props) => {
     });
 
     return (
-        <div {...getRootProps()}>
+        <div
+            {...getRootProps()}
+            className="relative flex h-64 w-full items-center justify-center border border-dashed border-indigo-200 bg-gray-50"
+        >
             <input {...getInputProps()} />
-            {isDragActive ? (
-                <p>Drop the files here...</p>
+            {value ? (
+                <Image
+                    src={value}
+                    fill
+                    className="object-contain p-8"
+                    alt="Recipe image"
+                />
             ) : (
-                <p>Drag and drop some files here, or click to select files</p>
+                <p className="text-sm font-medium text-gray-600">
+                    {isDragActive
+                        ? "Drop the files here..."
+                        : "Drag and drop some files here, or click to select files"}
+                </p>
             )}
-            <img src={value || undefined} alt="Recipe image" />
         </div>
     );
 };
