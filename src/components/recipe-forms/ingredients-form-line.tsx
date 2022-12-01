@@ -5,6 +5,7 @@ import type { UseFieldArrayRemove } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
 import FormError from "../common/form-error";
 import Input from "../common/input";
+import Label from "../common/label";
 import Select from "../common/select";
 
 interface Props {
@@ -23,9 +24,10 @@ const IngredientsFormLine = (props: Props) => {
         formState: { errors }
     } = useFormContext<CreateRecipeInputType>();
 
-    return (
-        <>
-            <div>
+    const renderAmount = () => {
+        return (
+            <div className="mb-3 mt-3 lg:m-0">
+                <Label className="block lg:hidden">Menge</Label>
                 <Input
                     type="number"
                     min="0"
@@ -41,7 +43,13 @@ const IngredientsFormLine = (props: Props) => {
                     error={errors.ingredients?.[index]?.amount?.message}
                 />
             </div>
-            <div>
+        );
+    };
+
+    const renderUnit = () => {
+        return (
+            <div className="mb-3 lg:mb-0">
+                <Label className="block lg:hidden">Einheit</Label>
                 <Controller
                     name={`ingredients.${index}.unitId`}
                     control={control}
@@ -67,8 +75,13 @@ const IngredientsFormLine = (props: Props) => {
                     error={errors.ingredients?.[index]?.unitId?.message}
                 />
             </div>
+        );
+    };
 
-            <div>
+    const renderIngredient = () => {
+        return (
+            <div className="mb-3 lg:mb-0">
+                <Label className="block lg:hidden">Zutat</Label>
                 <Controller
                     name={`ingredients.${index}.ingredientId`}
                     control={control}
@@ -97,14 +110,21 @@ const IngredientsFormLine = (props: Props) => {
                     error={errors.ingredients?.[index]?.ingredientId?.message}
                 />
             </div>
+        );
+    };
 
+    return (
+        <div className="flex flex-col lg:contents">
+            {renderAmount()}
+            {renderUnit()}
+            {renderIngredient()}
             <div
-                className="mt-1.5 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-gray-300"
+                className="mt-1.5 mb-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-gray-300 lg:mb-3"
                 onClick={() => remove(index)}
             >
                 <TrashIcon className="h-4 w-4" />
             </div>
-        </>
+        </div>
     );
 };
 

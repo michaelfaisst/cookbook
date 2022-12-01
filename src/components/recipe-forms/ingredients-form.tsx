@@ -46,10 +46,10 @@ const IngredientsForm = () => {
             </div>
 
             {fields.length > 0 && (
-                <div className="mb-6 grid grid-cols-ingredientsForm gap-x-6 gap-y-3">
-                    <Label className="mb-0">Menge</Label>
+                <div className="mb-6 flex flex-col gap-x-6 gap-y-0 divide-y lg:grid lg:grid-cols-ingredientsForm lg:gap-y-3 lg:divide-transparent">
+                    <Label className="mb-0 hidden lg:block">Menge</Label>
 
-                    <div className="mb-0 flex flex-row items-center justify-between">
+                    <div className="mb-0 hidden items-center justify-between lg:flex lg:flex-row">
                         <Label className="mb-0">Einheit</Label>
                         <Link
                             icon={PlusIcon}
@@ -59,7 +59,7 @@ const IngredientsForm = () => {
                         </Link>
                     </div>
 
-                    <div className="mb-0 flex flex-row items-center justify-between">
+                    <div className="mb-0 hidden items-center justify-between lg:flex lg:flex-row">
                         <Label className="mb-0">Zutat</Label>
                         <Link
                             icon={PlusIcon}
@@ -71,7 +71,7 @@ const IngredientsForm = () => {
                         </Link>
                     </div>
 
-                    <div />
+                    <div className="hidden lg:block" />
 
                     {fields.map((item, index) => (
                         <IngredientsFormLine
