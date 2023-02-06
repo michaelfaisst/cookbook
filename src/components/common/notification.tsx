@@ -1,6 +1,7 @@
+import { Fragment } from "react";
+
 import { Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
 
 interface Props {
     visible: boolean;

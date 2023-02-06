@@ -1,6 +1,8 @@
 import React from "react";
 import type { HTMLProps } from "react";
+
 import type { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+
 import { classNames } from "@/utils";
 
 interface Props extends HTMLProps<HTMLInputElement> {

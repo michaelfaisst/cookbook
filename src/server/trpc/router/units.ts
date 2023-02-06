@@ -1,6 +1,7 @@
-import { router, publicProcedure, protectedProcedure } from "../trpc";
 import { prisma } from "@/server/db/client";
 import { createUnitInputSchema } from "@/utils/validators";
+
+import { protectedProcedure, publicProcedure, router } from "../trpc";
 
 export const unitsRouter = router({
     getUnits: publicProcedure.query(() => {

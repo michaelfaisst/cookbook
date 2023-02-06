@@ -1,4 +1,12 @@
+import { FormProvider, useForm } from "react-hook-form";
+
+import { useRouter } from "next/router";
+
+import { CheckIcon } from "@heroicons/react/24/outline";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import Button from "@/components/common/button";
+import Content from "@/components/content";
 import Layout from "@/components/layout";
 import GeneralRecipeForm from "@/components/recipe-forms/general-form";
 import IngredientsForm from "@/components/recipe-forms/ingredients-form";
@@ -6,11 +14,6 @@ import InstructionsForm from "@/components/recipe-forms/instructions-form";
 import { trpc } from "@/utils/trpc";
 import type { CreateRecipeInputType } from "@/utils/validators";
 import { createRecipeInputSchema } from "@/utils/validators";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/router";
-import { FormProvider, useForm } from "react-hook-form";
-import { CheckIcon } from "@heroicons/react/24/outline";
-import Content from "@/components/content";
 
 const NewRecipePage = () => {
     const formMethods = useForm<CreateRecipeInputType>({

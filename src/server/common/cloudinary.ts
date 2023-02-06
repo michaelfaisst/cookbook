@@ -1,6 +1,7 @@
-import { env } from "@/env/server.mjs";
 import cloudinary from "cloudinary";
 import sharp from "sharp";
+
+import { env } from "@/env/server.mjs";
 
 cloudinary.v2.config({
     cloud_name: env.CLOUDINARY_CLOUD_KEY,

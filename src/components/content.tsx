@@ -1,5 +1,6 @@
-import { classNames } from "@/utils";
 import type { HTMLProps, PropsWithChildren } from "react";
+
+import { classNames } from "@/utils";
 
 const Content = (props: PropsWithChildren<HTMLProps<HTMLDivElement>>) => {
     const { className, ...restProps } = props;

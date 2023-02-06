@@ -1,5 +1,6 @@
-import type { RecipeInstruction } from "@/utils/types";
 import { Fragment } from "react";
+
+import type { RecipeInstruction } from "@/utils/types";
 
 interface Props {
     instructions: RecipeInstruction[];

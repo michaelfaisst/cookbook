@@ -1,3 +1,11 @@
+import React from "react";
+
+import Image from "next/image";
+import { useRouter } from "next/router";
+
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { format } from "date-fns";
+
 import Button from "@/components/common/button";
 import Loading from "@/components/common/loading";
 import Content from "@/components/content";
@@ -5,11 +13,6 @@ import Layout from "@/components/layout";
 import IngredientsView from "@/components/recipe-views/ingredients";
 import InstructionsView from "@/components/recipe-views/instructions";
 import { trpc } from "@/utils/trpc";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import React from "react";
-import { format } from "date-fns";
 
 const RecipePage = () => {
     const router = useRouter();

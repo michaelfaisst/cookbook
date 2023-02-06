@@ -1,6 +1,8 @@
-import { classNames } from "@/utils";
-import type { ClockIcon } from "@heroicons/react/24/outline";
 import type { ButtonHTMLAttributes } from "react";
+
+import type { ClockIcon } from "@heroicons/react/24/outline";
+
+import { classNames } from "@/utils";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     icon: typeof ClockIcon;

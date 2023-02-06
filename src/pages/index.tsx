@@ -1,12 +1,14 @@
-import Button from "@/components/common/button";
-import Layout from "@/components/layout";
-import RecipeCard from "@/components/recipe-card";
-import { trpc } from "@/utils/trpc";
 import { type NextPage } from "next";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+
 import { PlusIcon } from "@heroicons/react/24/outline";
+
+import Button from "@/components/common/button";
 import Content from "@/components/content";
+import Layout from "@/components/layout";
+import RecipeCard from "@/components/recipe-card";
+import { trpc } from "@/utils/trpc";
 
 const Home: NextPage = () => {
     const { data: session } = useSession();

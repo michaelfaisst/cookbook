@@ -1,3 +1,11 @@
+import { FormProvider, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+
+import { useRouter } from "next/router";
+
+import { CheckIcon } from "@heroicons/react/24/outline";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import Button from "@/components/common/button";
 import Loading from "@/components/common/loading";
 import Notification from "@/components/common/notification";
@@ -9,11 +17,6 @@ import InstructionsForm from "@/components/recipe-forms/instructions-form";
 import { trpc } from "@/utils/trpc";
 import type { UpdateRecipeInputType } from "@/utils/validators";
 import { createRecipeInputSchema } from "@/utils/validators";
-import { CheckIcon } from "@heroicons/react/24/outline";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/router";
-import { FormProvider, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
 const NewRecipePage = () => {
     const router = useRouter();

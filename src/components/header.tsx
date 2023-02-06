@@ -1,10 +1,13 @@
-import { classNames } from "@/utils";
-import { faUserChef } from "@fortawesome/pro-light-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { faUserChef } from "@fortawesome/pro-light-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+
+import { classNames } from "@/utils";
+
 import Button from "./common/button";
 import Input from "./common/input";
 

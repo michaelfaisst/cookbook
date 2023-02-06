@@ -1,7 +1,9 @@
-import type { RecipeListOutput } from "@/utils/types";
-import Link from "next/link";
 import React from "react";
+
 import Image from "next/image";
+import Link from "next/link";
+
+import type { RecipeListOutput } from "@/utils/types";
 
 interface Props {
     recipe: RecipeListOutput;

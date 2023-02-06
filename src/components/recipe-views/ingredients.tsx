@@ -1,7 +1,10 @@
-import type { RecipeIngredient } from "@/utils/types";
+import { Fragment, useState } from "react";
+
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { round } from "lodash";
-import { Fragment, useState } from "react";
+
+import type { RecipeIngredient } from "@/utils/types";
+
 import IconButton from "../common/icon-button";
 
 interface Props {

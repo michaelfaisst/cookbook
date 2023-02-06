@@ -1,7 +1,10 @@
-import type { CreateRecipeInputType } from "@/utils/validators";
-import { TrashIcon } from "@heroicons/react/24/outline";
 import React, { Fragment } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
+
+import { TrashIcon } from "@heroicons/react/24/outline";
+
+import type { CreateRecipeInputType } from "@/utils/validators";
+
 import Button from "../common/button";
 import TextArea from "../common/textarea";
 
