@@ -17,10 +17,10 @@ const Home: NextPage = () => {
     return (
         <Layout>
             <Content>
-                <div className="mb-10 flex flex-col sm:flex-row">
-                    <div className="mb-4 flex-1 sm:mb-0">
-                        <h1 className="text-3xl font-bold leading-7 text-gray-900">
-                            Manuelas Rezepte
+                <div className="mb-8 flex flex-col sm:flex-row sm:items-center">
+                    <div className="flex-1 sm:mb-0">
+                        <h1 className="font-title text-xl text-slate-900">
+                            Neueste Rezepte
                         </h1>
                     </div>
 
@@ -37,7 +37,7 @@ const Home: NextPage = () => {
                     )}
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
                     {data?.map((recipe) => (
                         <RecipeCard key={recipe.id} recipe={recipe} />
                     ))}

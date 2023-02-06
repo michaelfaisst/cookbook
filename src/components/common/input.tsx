@@ -13,7 +13,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
         const Icon = icon;
 
         return (
-            <div className="relative rounded-lg text-gray-500 shadow-sm">
+            <div className="relative rounded-lg text-gray-500">
                 {Icon && (
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <Icon className="h-4 w-4" />
@@ -22,7 +22,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
                 <input
                     ref={ref}
                     className={classNames(
-                        "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500",
+                        "block w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm text-gray-900 transition-colors focus:border-rose-400 focus:outline-none",
                         className,
                         error && "border-red-600",
                         Icon && "pl-10"

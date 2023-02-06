@@ -51,7 +51,9 @@ const getRecipe = async (context: Context, id: string) => {
                     unit: true
                 }
             },
-            instructions: true
+            instructions: true,
+            category: true,
+            createdBy: true
         }
     });
 

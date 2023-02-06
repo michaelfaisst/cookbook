@@ -12,7 +12,7 @@ const IconButton = ({ icon, className, ...restProps }: Props) => {
     return (
         <button
             className={classNames(
-                "rounded-full border border-gray-300 bg-white p-1 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none",
+                "rounded-full border border-rose-100 bg-white p-1 font-medium text-rose-700 transition-colors hover:bg-rose-100 focus:outline-none",
                 className
             )}
             {...restProps}

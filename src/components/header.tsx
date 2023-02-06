@@ -41,29 +41,22 @@ const Header = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 gap-4 sm:justify-between">
                     <div className="flex">
-                        <div className="flex items-center">
-                            <Link href="/">
-                                <FontAwesomeIcon
-                                    icon={faUserChef}
-                                    className="h-6 font-bold text-indigo-500"
-                                />
-                            </Link>
+                        <div className="flex items-center font-title text-xl font-semibold text-slate-900">
+                            <Link href="/">Manuelas Recipes</Link>
                         </div>
-
-                        <div className="ml-12 hidden space-x-8 sm:flex">
+                    </div>
+                    <div className="flex flex-1 flex-row items-center sm:flex-initial sm:gap-4">
+                        <div className="hidden space-x-8 sm:flex">
                             <Link
                                 href="/"
                                 className={classNames(
-                                    "border-indigo-500 text-gray-900",
-                                    "inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium"
+                                    "inline-flex items-center text-sm font-medium"
                                 )}
                             >
                                 Rezepte
                             </Link>
                         </div>
-                    </div>
-                    <div className="flex flex-1 flex-row items-center sm:flex-initial">
-                        <div className="flex-1 sm:mr-10">
+                        <div className="flex-1">
                             <Input
                                 placeholder="Suche"
                                 icon={MagnifyingGlassIcon}

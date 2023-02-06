@@ -28,9 +28,9 @@ const IngredientsView = ({ servings, ingredients }: Props) => {
 
     return (
         <Fragment>
-            <h2 className="mb-4 text-2xl">Zutaten</h2>
+            <h2 className="mb-4 font-title text-xl">Zutaten</h2>
 
-            <div className="mb-4 flex flex-row gap-4">
+            <div className="mb-6 flex flex-row gap-4">
                 <IconButton
                     icon={MinusIcon}
                     onClick={() =>
@@ -56,10 +56,10 @@ const IngredientsView = ({ servings, ingredients }: Props) => {
                             <input
                                 id={ingredient.id}
                                 type="checkbox"
-                                className="h-4 w-4 rounded border-gray-300 text-indigo-600"
+                                className="h-4 w-4 rounded-full border-slate-300 text-rose-300 focus:outline-none focus:ring-transparent"
                             />
                         </div>
-                        <div className="ml-3 text-sm">
+                        <div className="ml-3">
                             <label htmlFor={ingredient.id}>
                                 {getIngredientDisplayString(ingredient)}
                             </label>

@@ -11,7 +11,7 @@ const TextArea = React.forwardRef<
             ref={ref}
             rows={5}
             className={classNames(
-                "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500",
+                "block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-rose-400 focus:ring-transparent",
                 className
             )}
             {...restProps}

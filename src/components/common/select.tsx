@@ -32,7 +32,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
         query === "" ? data : data.filter((item) => filter(query, item));
 
     let inputClasses =
-        "w-full rounded-lg border border-gray-300 p-2.5 pr-10 text-sm leading-5 text-gray-900 focus:ring-0";
+        "w-full rounded-lg border border-gray-300 p-2.5 pr-10 text-sm text-gray-900 focus:border-rose-400 focus:ring-transparent";
 
     if (error) {
         inputClasses = `${inputClasses} border-red-400`;
@@ -41,7 +41,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
     return (
         <Combobox value={value} onChange={(e) => onChange(e || null)} nullable>
             <div className="relative">
-                <div className="relative block w-full cursor-default rounded-lg bg-white focus:border-blue-500 focus:ring-blue-500">
+                <div className="relative block w-full cursor-default rounded-lg bg-white focus:border-rose-400 focus:ring-transparent">
                     <Combobox.Input
                         autoComplete="off"
                         className={inputClasses}
@@ -73,9 +73,7 @@ const Select = <TVal, T>(props: Props<TVal, T>) => {
                             <Combobox.Option
                                 className={({ active }) =>
                                     `relative cursor-default select-none py-2 px-4 ${
-                                        active
-                                            ? `bg-blue-500 text-white`
-                                            : "text-gray-900"
+                                        active ? `bg-rose-100` : "text-gray-900"
                                     }`
                                 }
                                 key={keyProp(item)}

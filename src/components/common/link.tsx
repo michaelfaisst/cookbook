@@ -13,7 +13,7 @@ const Link = ({ children, onClick, icon }: PropsWithChildren<Props>) => {
     return (
         <a
             onClick={onClick}
-            className="flex cursor-pointer flex-row items-center text-xs text-indigo-500"
+            className="flex cursor-pointer flex-row items-center text-xs text-rose-600"
         >
             {Icon && <Icon className="mr-1 h-3 w-3" />}
             <span>{children}</span>

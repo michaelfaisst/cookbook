@@ -1,8 +1,6 @@
 import type { RecipeListOutput } from "@/utils/types";
-import { format } from "date-fns";
 import Link from "next/link";
 import React from "react";
-import { ClockIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 interface Props {
@@ -13,56 +11,24 @@ const RecipeCard = (props: Props) => {
     const { recipe } = props;
 
     return (
-        <div className="flex flex-col overflow-hidden rounded-lg shadow-lg">
-            <Link href={`/recipe/${recipe.id}`} className="flex-shrink-0">
-                <div className="relative h-48 w-full">
+        <div className="flex flex-col rounded-lg">
+            <Link href={`/recipe/${recipe.id}`} className="mb-3 flex-shrink-0">
+                <div className="relative h-96 w-full overflow-hidden rounded-lg">
                     <Image
                         fill
-                        className="object-cover"
+                        className="rounded-lg object-cover transition-transform hover:scale-105"
                         src={recipe.image || "/images/placeholder.png"}
                         alt={recipe.name}
                     />
                 </div>
             </Link>
-
-            <div className="flex flex-1 flex-col justify-between bg-white p-6">
-                <div className="flex-1">
-                    <p className="text-sm font-medium text-indigo-600">
-                        {recipe.category.name}
-                    </p>
-
-                    <Link href={`/recipe/${recipe.id}`} className="mt-2 block">
-                        <p className="text-xl font-semibold text-gray-900">
-                            {recipe.name}
-                        </p>
-
-                        <p className="mt-3 text-base text-gray-500">
-                            {recipe.description}
-                        </p>
-                    </Link>
-                </div>
-                <div className="mt-6 flex items-center">
-                    <div className="flex-shrink-0">
-                        <Image
-                            width={40}
-                            height={40}
-                            alt={recipe.createdBy.name || "Recipe Author Image"}
-                            className="h-10 w-10 rounded-full"
-                            src={recipe.createdBy.image || ""}
-                        />
-                    </div>
-                    <div className="ml-3">
-                        <p className="text-sm font-medium text-gray-900">
-                            {recipe.createdBy.name}
-                        </p>
-                        <div className="flex items-center gap-1 text-sm text-gray-500">
-                            <ClockIcon className="h-4 w-4" />
-                            <time dateTime={recipe.createdAt.toISOString()}>
-                                {format(recipe.createdAt, "dd.MM.yyyy")}
-                            </time>
-                        </div>
-                    </div>
-                </div>
+            <span className="mb-1.5 text-sm text-rose-500">
+                {recipe.category.name}
+            </span>
+            <h2 className="mb-1.5 font-title text-lg">{recipe.name}</h2>
+            <div className="flex items-center text-sm">
+                <span className="mr-1 text-slate-500">Erstellt von:</span>
+                <span>{recipe.createdBy.name}</span>
             </div>
         </div>
     );

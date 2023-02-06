@@ -9,6 +9,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
+import { format } from "date-fns";
 
 const RecipePage = () => {
     const router = useRouter();
@@ -37,7 +38,7 @@ const RecipePage = () => {
         return (
             <Layout>
                 <Content>
-                    <Loading className="flex h-full flex-1 items-center justify-center bg-gray-50" />
+                    <Loading className="flex h-full flex-1 items-center justify-center" />
                 </Content>
             </Layout>
         );
@@ -45,20 +46,9 @@ const RecipePage = () => {
 
     return (
         <Layout>
-            <div aria-hidden="true" className="relative">
-                <div className="h-64 w-full">
-                    <Image
-                        src={recipe.image || "/images/placeholder.png"}
-                        fill
-                        alt={recipe.name}
-                        className="object-cover"
-                    />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-50"></div>
-            </div>
-            <Content className="-mt-12">
-                <div className="flex flex-col items-start justify-between py-5 sm:flex-row sm:items-center">
-                    <h2 className="mb-4 text-3xl font-bold leading-7 text-gray-900 sm:mb-0">
+            <Content>
+                <div className="mb-8 flex flex-col items-start justify-between sm:flex-row sm:items-center">
+                    <h2 className="mb-4 font-title text-xl text-slate-900 sm:mb-0">
                         {recipe.name}
                     </h2>
                     {recipe.editable && (
@@ -82,32 +72,86 @@ const RecipePage = () => {
                         </div>
                     )}
                 </div>
-                <p className="mb-2">{recipe.description}</p>
 
-                {recipe.prepTime > 0 && (
-                    <p>Vorbereitungszeit: {recipe.prepTime} Minuten</p>
-                )}
+                <div className="grid w-full grid-cols-[1fr_400px] items-start gap-4">
+                    <div className="relative h-[24rem] w-full">
+                        <Image
+                            src={recipe.image || "/images/placeholder.png"}
+                            fill
+                            alt={recipe.name}
+                            className="h-full w-full rounded-lg object-cover"
+                        />
+                    </div>
+                    <div>
+                        <div className="border-y border-y-slate-200 py-4">
+                            <div className="mb-4 flex flex-row justify-between">
+                                <div className="text-slate-500">Kategorie</div>
+                                <div>{recipe.category.name}</div>
+                            </div>
 
-                {recipe.cookTime > 0 && (
-                    <p>Kochzeit: {recipe.cookTime} Minuten</p>
-                )}
+                            {recipe.prepTime > 0 && (
+                                <div className="flex flex-row justify-between">
+                                    <div className="text-slate-500">
+                                        Vorbereitungszeit
+                                    </div>
+                                    <div>{recipe.prepTime} Minuten</div>
+                                </div>
+                            )}
 
-                {recipe.chillTime > 0 && (
-                    <p>Chill time: {recipe.chillTime} Minuten</p>
-                )}
+                            {recipe.cookTime > 0 && (
+                                <div className="flex flex-row justify-between">
+                                    <div className="font-extralight text-slate-500">
+                                        Kochzeit
+                                    </div>
+                                    <div>{recipe.cookTime} Minuten</div>
+                                </div>
+                            )}
 
-                <p>Total time: {recipe.totalTime} minuten</p>
+                            {recipe.chillTime > 0 && (
+                                <div className="flex flex-row justify-between">
+                                    <div className="font-thin text-slate-500">
+                                        Stehzeit
+                                    </div>
+                                    <div>{recipe.chillTime} Minuten</div>
+                                </div>
+                            )}
+                        </div>
 
-                <div className="mb-4" />
+                        <div className="mt-4 flex flex-row items-center gap-4">
+                            <Image
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-full"
+                                alt={
+                                    recipe.createdBy.name ||
+                                    "Recipe Author Image"
+                                }
+                                src={
+                                    recipe.createdBy.image ||
+                                    "/images/placeholder.png"
+                                }
+                            />
+                            <div>
+                                <div className="text-sm text-slate-500">
+                                    Erstellt am{" "}
+                                    {format(recipe.createdAt, "dd.MM.yyyy")} von
+                                </div>
+                                <div>{recipe.createdBy.name}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div className="mb-4 rounded-lg bg-white p-6 shadow">
+                <p className="mt-4 mb-12">{recipe.description}</p>
+
+                <div className="mb-12">
                     <IngredientsView
                         servings={recipe.servings}
                         ingredients={recipe.ingredients}
                     />
                 </div>
 
-                <div className="rounded-lg bg-white p-6 shadow">
+                <div className="mb-8">
                     <InstructionsView instructions={recipe.instructions} />
                 </div>
             </Content>

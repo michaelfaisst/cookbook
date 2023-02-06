@@ -29,7 +29,7 @@ const Button = ({
                     ? "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none"
                     : "",
                 mode === "primary"
-                    ? "border-transparent bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none"
+                    ? "border-transparent bg-rose-100 text-gray-900 transition-colors hover:bg-rose-200 focus:outline-none"
                     : "",
                 className
             )}
