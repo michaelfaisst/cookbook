@@ -7,7 +7,7 @@ interface Props {
 const Loading = ({
     size = 32,
     className,
-    fillClassName = "fill-indigo-500"
+    fillClassName = "fill-rose-500"
 }: Props) => {
     return (
         <div className={className}>

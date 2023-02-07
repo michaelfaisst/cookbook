@@ -4,5 +4,6 @@
 
 body {
     @apply antialiased;
+    @apply text-slate-900;
     overflow-y: scroll;
 }

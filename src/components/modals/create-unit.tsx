@@ -71,7 +71,7 @@ const CreateUnitModal = NiceModal.create(() => {
                                 id="createIngredientForm"
                                 onSubmit={handleSubmit(onSubmit)}
                             >
-                                <Dialog.Title className="text-xl">
+                                <Dialog.Title className="text-xl font-title">
                                     Einheit erstellen
                                 </Dialog.Title>
 

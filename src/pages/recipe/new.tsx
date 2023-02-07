@@ -44,7 +44,7 @@ const NewRecipePage = () => {
                 <FormProvider {...formMethods}>
                     <form onSubmit={formMethods.handleSubmit(onSubmit)}>
                         <div className="mb-10 flex flex-col justify-between sm:flex-row sm:items-center">
-                            <h1 className="mb-4 text-3xl font-bold leading-7 text-gray-900 sm:mb-0">
+                            <h1 className="mb-4 font-title text-xl sm:mb-0">
                                 Neues Rezept
                             </h1>
                             <div>
@@ -59,14 +59,14 @@ const NewRecipePage = () => {
                             </div>
                         </div>
 
-                        <div className="flex w-full max-w-3xl flex-col space-y-8">
-                            <div className="rounded-lg bg-white p-6 shadow">
+                        <div className="flex w-full max-w-3xl flex-col space-y-12">
+                            <div>
                                 <GeneralRecipeForm />
                             </div>
-                            <div className="rounded-lg bg-white p-6 shadow">
+                            <div>
                                 <IngredientsForm />
                             </div>
-                            <div className="rounded-lg bg-white p-6 shadow">
+                            <div>
                                 <InstructionsForm />
                             </div>
                         </div>

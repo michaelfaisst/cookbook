@@ -25,7 +25,7 @@ const Header = () => {
 
         return (
             <div onClick={() => signOut()} className="flex items-center gap-3">
-                <span className=" whitespace-nowrap text-sm font-medium text-gray-500">
+                <span className=" whitespace-nowrap text-sm font-medium text-slate-500">
                     {session.user?.name}
                 </span>
                 <Image
@@ -44,7 +44,7 @@ const Header = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 gap-4 sm:justify-between">
                     <div className="flex">
-                        <div className="flex items-center font-title text-xl font-semibold text-slate-900">
+                        <div className="flex items-center font-title text-xl font-semibold text-rose-300">
                             <Link href="/">Manuelas Recipes</Link>
                         </div>
                     </div>

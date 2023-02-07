@@ -70,7 +70,7 @@ const CreateIngredientModal = NiceModal.create(() => {
                     <div className="fixed inset-0 flex items-center justify-center p-4">
                         <Dialog.Panel className="w-full max-w-sm rounded-lg bg-white p-8">
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <Dialog.Title className="text-xl">
+                                <Dialog.Title className="text-xl font-title">
                                     Zutat erstellen
                                 </Dialog.Title>
 

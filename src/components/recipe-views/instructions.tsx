@@ -1,5 +1,7 @@
 import { Fragment } from "react";
 
+import test from "fs";
+
 import type { RecipeInstruction } from "@/utils/types";
 
 interface Props {
@@ -17,7 +19,7 @@ const InstructionsView = ({ instructions }: Props) => {
                         key={instruction.id}
                         className="flex flex-row items-center"
                     >
-                        <div className="mr-6 w-6 text-center font-title text-xl text-rose-200">
+                        <div className="mr-6 w-6 text-center font-title text-xl text-rose-300">
                             {index + 1}.
                         </div>
                         <div>{instruction.instruction}</div>

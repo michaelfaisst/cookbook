@@ -23,11 +23,9 @@ const GeneralRecipeForm = () => {
 
     return (
         <>
-            <div className="mb-6">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Allgemeine Information
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
+            <div className="mb-8">
+                <h3 className="text-lg font-title">Allgemeine Information</h3>
+                <p className="mt-1 text-sm text-slate-500">
                     Hier kannst du allgemeine Informationen zu deinem Rezept
                     angeben
                 </p>

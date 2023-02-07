@@ -21,9 +21,7 @@ const Home: NextPage = () => {
             <Content>
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-center">
                     <div className="flex-1 sm:mb-0">
-                        <h1 className="font-title text-xl text-slate-900">
-                            Neueste Rezepte
-                        </h1>
+                        <h1 className="font-title text-xl">Neueste Rezepte</h1>
                     </div>
 
                     {session && (

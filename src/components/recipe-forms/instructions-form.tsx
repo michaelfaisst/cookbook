@@ -19,10 +19,8 @@ const InstructionsForm = () => {
     return (
         <>
             <div className="mb-6">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Zubereitung
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
+                <h3 className="text-lg font-title">Zubereitung</h3>
+                <p className="mt-1 text-sm text-slate-500">
                     Hier kannst du alle Schritte zur Zubereitung deines Rezeptes
                     angeben
                 </p>
@@ -32,7 +30,9 @@ const InstructionsForm = () => {
                 <div className="mb-6 grid grid-cols-instructionsForm items-center gap-x-6 gap-y-3">
                     {fields.map((item, index) => (
                         <Fragment key={item.id}>
-                            <div className="text-xl">{index + 1}.</div>
+                            <div className="text-center font-title text-xl text-rose-300">
+                                {index + 1}.
+                            </div>
                             <TextArea
                                 {...register(
                                     `instructions.${index}.instruction`

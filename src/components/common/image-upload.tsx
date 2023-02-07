@@ -38,7 +38,7 @@ const ImageUpload = ({ value, onChange }: Props) => {
     return (
         <div
             {...getRootProps()}
-            className="relative flex h-64 w-full items-center justify-center border border-dashed border-indigo-200 bg-gray-50"
+            className="relative flex h-64 w-full items-center justify-center border border-dashed border-rose-200 bg-slate-50"
         >
             <input {...getInputProps()} />
             {value ? (

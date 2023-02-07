@@ -51,7 +51,7 @@ const RecipePage = () => {
         <Layout>
             <Content>
                 <div className="mb-8 flex flex-col items-start justify-between sm:flex-row sm:items-center">
-                    <h2 className="mb-4 font-title text-xl text-slate-900 sm:mb-0">
+                    <h2 className="mb-4 font-title text-xl sm:mb-0">
                         {recipe.name}
                     </h2>
                     {recipe.editable && (

@@ -24,7 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
                 <input
                     ref={ref}
                     className={classNames(
-                        "block w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm text-gray-900 transition-colors focus:border-rose-400 focus:outline-none",
+                        "block w-full rounded-lg border border-gray-200 bg-white p-2.5 text-sm text-gray-900 transition-colors focus:border-rose-400 focus:outline-none focus:ring-0",
                         className,
                         error && "border-red-600",
                         Icon && "pl-10"
