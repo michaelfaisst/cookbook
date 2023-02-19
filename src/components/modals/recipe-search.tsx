@@ -81,6 +81,7 @@ const RecipeSearch = NiceModal.create(() => {
                                 >
                                     {recipes?.map((recipe) => (
                                         <li
+                                            key={recipe.id}
                                             className="cursor-default select-none px-4 py-2 flex flex-row items-center gap-4 hover:bg-rose-50 transition-colors"
                                             id="option-1"
                                             role="option"
