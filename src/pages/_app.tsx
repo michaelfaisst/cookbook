@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     pageProps: { session, ...pageProps }
 }: AppProps) => {
     return (
-        <main>
+        <main className="relative">
             <SessionProvider session={session}>
                 <NiceModal.Provider>
                     <AnimatePresence mode="wait">
