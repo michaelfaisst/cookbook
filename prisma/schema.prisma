@@ -3,7 +3,6 @@
 
 generator client {
     provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
@@ -33,6 +32,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -41,6 +41,8 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
@@ -85,6 +87,9 @@ model Recipe {
     createdById String
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
+
+    @@index([categoryId])
+    @@index([createdById])
 }
 
 model RecipeIngredient {
@@ -99,6 +104,10 @@ model RecipeIngredient {
     ingredientId String
     unit         Unit?      @relation(fields: [unitId], references: [id])
     unitId       String?
+
+    @@index([recipeId])
+    @@index([ingredientId])
+    @@index([unitId])
 }
 
 model Ingredient {
@@ -124,6 +133,8 @@ model RecipeInstruction {
 
     recipe   Recipe @relation(fields: [recipeId], references: [id])
     recipeId String
+
+    @@index([recipeId])
 }
 
 model Category {
