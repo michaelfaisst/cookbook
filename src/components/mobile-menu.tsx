@@ -2,9 +2,11 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import NiceModal from "@ebay/nice-modal-react";
 import {
     ArrowLeftOnRectangleIcon,
     Bars3Icon,
+    MagnifyingGlassIcon,
     XMarkIcon
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
@@ -12,6 +14,7 @@ import { useAtom } from "jotai";
 import { mobileMenuOpen } from "store";
 
 import Button from "./common/button";
+import RecipeSearch from "./modals/recipe-search";
 
 const MobileMenu = () => {
     const [menuOpen, setMenuOpen] = useAtom(mobileMenuOpen);
@@ -19,10 +22,16 @@ const MobileMenu = () => {
 
     return (
         <div className="sm:hidden">
-            <Bars3Icon
-                className="w-6 h-6 text-rose-300"
-                onClick={() => setMenuOpen(true)}
-            />
+            <div className="flex flex-row text-rose-300 items-center gap-4">
+                <MagnifyingGlassIcon
+                    className="w-6 h-6"
+                    onClick={() => NiceModal.show(RecipeSearch)}
+                />
+                <Bars3Icon
+                    className="w-6 h-6"
+                    onClick={() => setMenuOpen(true)}
+                />
+            </div>
 
             <div
                 className={clsx(

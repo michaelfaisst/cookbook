@@ -33,6 +33,10 @@ export const getRecipeInputSchema = z.object({
     id: z.string().cuid()
 });
 
+export const searchRecipesInputSchema = z.object({
+    search: z.string()
+});
+
 export const createUnitInputSchema = z.object({
     name: z.string().min(1)
 });

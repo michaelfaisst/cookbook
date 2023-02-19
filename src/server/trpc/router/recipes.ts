@@ -2,11 +2,11 @@ import type { User } from "next-auth";
 
 import { TRPCError } from "@trpc/server";
 
-import { getChangedListData } from "@/server/common/utils";
 import { prisma } from "@/server/db/client";
-import type {
+import {
     CreateRecipeInputType,
-    UpdateRecipeInputType
+    UpdateRecipeInputType,
+    searchRecipesInputSchema
 } from "@/utils/validators";
 import {
     createRecipeInputSchema,
@@ -154,11 +154,40 @@ const deleteRecipe = async (context: Context, id: string) => {
     });
 };
 
+const searchRecipes = async (search: string) => {
+    if (search.trim() === "") {
+        return [];
+    }
+
+    const recipes = await prisma.recipe.findMany({
+        where: {
+            OR: [
+                {
+                    name: {
+                        contains: search
+                    }
+                },
+                {
+                    description: {
+                        contains: search
+                    }
+                }
+            ]
+        },
+        take: 10
+    });
+
+    return recipes;
+};
+
 export const recipesRouter = router({
     getRecipes: publicProcedure.query(getRecipes),
     getRecipe: publicProcedure
         .input(getRecipeInputSchema)
         .query(({ ctx, input }) => getRecipe(ctx, input.id)),
+    searchRecipes: publicProcedure
+        .input(searchRecipesInputSchema)
+        .query(({ input }) => searchRecipes(input.search)),
     createRecipe: protectedProcedure
         .input(createRecipeInputSchema)
         .mutation(async ({ ctx, input }) =>

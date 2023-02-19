@@ -2,12 +2,14 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
+import NiceModal from "@ebay/nice-modal-react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 import { classNames } from "@/utils";
 
 import Button from "./common/button";
 import Input from "./common/input";
+import RecipeSearch from "./modals/recipe-search";
 
 const DesktopMenu = () => {
     const { data: session, status } = useSession();
@@ -46,7 +48,12 @@ const DesktopMenu = () => {
                 </Link>
             </div>
             <div className="flex-1">
-                <Input placeholder="Suche" icon={MagnifyingGlassIcon} />
+                <Input
+                    onClick={() => NiceModal.show(RecipeSearch)}
+                    placeholder="Suche"
+                    className="cursor-pointer"
+                    icon={MagnifyingGlassIcon}
+                />
             </div>
             <div>{renderUser()}</div>
         </div>
