@@ -120,7 +120,7 @@ const RecipePage = () => {
                             )}
                         </div>
 
-                        <div className="mb-4 sm:mb-0 sm:mt-4 flex flex-row items-center gap-4 order-first">
+                        <div className="mb-4 sm:mb-0 sm:mt-4 flex flex-row items-center gap-4 order-first sm:order-none">
                             <Image
                                 width={40}
                                 height={40}
