@@ -56,7 +56,8 @@ const MobileMenu = () => {
                         <div className="flex flex-row justify-between items-center">
                             <div className="flex flex-row items-center gap-4">
                                 <Image
-                                    src={session?.user?.image}
+                                    src={session?.user?.image || ""}
+                                    alt={session.user?.name || "Profilbild"}
                                     width={48}
                                     height={48}
                                     className="rounded-full border border-white"
