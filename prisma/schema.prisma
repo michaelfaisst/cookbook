@@ -3,6 +3,7 @@
 
 generator client {
     provider        = "prisma-client-js"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -90,6 +91,8 @@ model Recipe {
 
     @@index([categoryId])
     @@index([createdById])
+
+    @@fulltext([name, description])
 }
 
 model RecipeIngredient {
