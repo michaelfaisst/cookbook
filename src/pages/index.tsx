@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <Layout>
             <Content>
                 <div className="mb-8 flex flex-col sm:flex-row sm:items-center">
-                    <div className="flex-1 sm:mb-0">
+                    <div className="flex-1 mb-4 sm:mb-0">
                         <h1 className="font-title text-xl">Neueste Rezepte</h1>
                     </div>
 

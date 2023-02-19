@@ -27,7 +27,9 @@ const RecipeCard = (props: Props) => {
             <span className="mb-1.5 text-sm text-rose-500">
                 {recipe.category.name}
             </span>
-            <h2 className="mb-1.5 font-title text-lg">{recipe.name}</h2>
+            <h2 className="mb-1.5 font-title text-lg line-clamp-2">
+                {recipe.name}
+            </h2>
             <div className="flex items-center text-sm">
                 <span className="mr-1 text-slate-500">Erstellt von:</span>
                 <span>{recipe.createdBy.name}</span>

@@ -76,7 +76,7 @@ const RecipePage = () => {
                     )}
                 </div>
 
-                <div className="grid w-full grid-cols-[1fr_400px] items-start gap-4">
+                <div className="flex flex-col sm:grid w-full sm:grid-cols-[1fr_400px] sm:items-start gap-4">
                     <div className="relative h-[24rem] w-full">
                         <Image
                             src={recipe.image || "/images/placeholder.png"}
@@ -85,7 +85,7 @@ const RecipePage = () => {
                             className="h-full w-full rounded-lg object-cover"
                         />
                     </div>
-                    <div>
+                    <div className="flex flex-col">
                         <div className="border-y border-y-slate-200 py-4">
                             <div className="mb-4 flex flex-row justify-between">
                                 <div className="text-slate-500">Kategorie</div>
@@ -120,7 +120,7 @@ const RecipePage = () => {
                             )}
                         </div>
 
-                        <div className="mt-4 flex flex-row items-center gap-4">
+                        <div className="mb-4 sm:mb-0 sm:mt-4 flex flex-row items-center gap-4 order-first">
                             <Image
                                 width={40}
                                 height={40}

@@ -49,7 +49,7 @@ const ImageUpload = ({ value, onChange }: Props) => {
                     alt="Recipe image"
                 />
             ) : (
-                <p className="text-sm font-medium text-gray-600">
+                <p className="p-4 text-sm font-medium text-gray-600">
                     {isDragActive
                         ? "Drop the files here..."
                         : "Drag and drop some files here, or click to select files"}

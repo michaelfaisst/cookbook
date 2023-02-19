@@ -33,17 +33,19 @@ const IngredientsForm = () => {
                 </p>
             </div>
 
-            <div className="mb-8 flex flex-row items-center">
-                <span className="mr-4">Zutaten für:</span>
-                <Input
-                    type="number"
-                    className="mr-2 w-20"
-                    min="1"
-                    {...register("servings", {
-                        valueAsNumber: true
-                    })}
-                />
-                <span>Personen</span>
+            <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center">
+                <span className="mb-2 sm:mb-0 mr-4">Zutaten für:</span>
+                <div className="flex flex-row items-center gap-2">
+                    <Input
+                        type="number"
+                        className="mr-2 w-20"
+                        min="1"
+                        {...register("servings", {
+                            valueAsNumber: true
+                        })}
+                    />
+                    <span>Personen</span>
+                </div>
             </div>
 
             {fields.length > 0 && (

@@ -2,7 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 import { classNames } from "@/utils";
 
@@ -23,9 +23,6 @@ const Header = () => {
 
         return (
             <div onClick={() => signOut()} className="flex items-center gap-3">
-                <span className=" whitespace-nowrap text-sm font-medium text-slate-500">
-                    {session.user?.name}
-                </span>
                 <Image
                     src={session.user?.image || ""}
                     width={32}
@@ -40,14 +37,14 @@ const Header = () => {
     return (
         <div className="bg-white shadow-sm">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 gap-4 sm:justify-between">
+                <div className="relative flex h-16 gap-4 items-center justify-between">
                     <div className="flex">
                         <div className="flex items-center font-title text-xl font-semibold text-rose-300">
                             <Link href="/">Manuelas Recipes</Link>
                         </div>
                     </div>
-                    <div className="flex flex-1 flex-row items-center sm:flex-initial sm:gap-4">
-                        <div className="hidden space-x-8 sm:flex">
+                    <div className="hidden sm:flex flex-1 flex-row items-center sm:flex-initial sm:gap-4">
+                        <div className="space-x-8">
                             <Link
                                 href="/"
                                 className={classNames(
@@ -63,7 +60,10 @@ const Header = () => {
                                 icon={MagnifyingGlassIcon}
                             />
                         </div>
-                        <div className="hidden sm:block">{renderUser()}</div>
+                        <div>{renderUser()}</div>
+                    </div>
+                    <div className="sm:hidden">
+                        <Bars3Icon className="w-6 h-6 text-rose-300" />
                     </div>
                 </div>
             </div>
