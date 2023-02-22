@@ -72,25 +72,30 @@ const createRecipe = async (user: User, input: CreateRecipeInputType) => {
     const { ingredients, instructions, image, ...restInput } = input;
     const totalTime = input.prepTime + input.cookTime + input.chillTime;
 
-    const uploadedImage = await uploadImage(image);
+    try {
+        const uploadedImage = await uploadImage(image);
 
-    return prisma.recipe.create({
-        data: {
-            ...restInput,
-            totalTime,
-            imageId: uploadedImage?.id,
-            image: uploadedImage?.url,
-            createdById: user.id,
-            ingredients: {
-                createMany: {
-                    data: ingredients
+        return prisma.recipe.create({
+            data: {
+                ...restInput,
+                totalTime,
+                imageId: uploadedImage?.id,
+                image: uploadedImage?.url,
+                createdById: user.id,
+                ingredients: {
+                    createMany: {
+                        data: ingredients
+                    }
+                },
+                instructions: {
+                    createMany: { data: instructions }
                 }
-            },
-            instructions: {
-                createMany: { data: instructions }
             }
-        }
-    });
+        });
+    } catch (e) {
+        console.error(e);
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+    }
 };
 
 const updateRecipe = async (context: Context, input: UpdateRecipeInputType) => {
@@ -103,41 +108,44 @@ const updateRecipe = async (context: Context, input: UpdateRecipeInputType) => {
     const { ingredients, instructions, ...restInput } = input;
     let uploadImageResult: IUploadResult | undefined = undefined;
 
-    console.log(input.image);
-
-    if (input.image && input.image !== recipe.image) {
-        if (recipe.imageId) {
-            deleteImage(recipe.imageId);
-        }
-
-        uploadImageResult = await uploadImage(input.image);
-    }
-
-    const totalTime = input.prepTime + input.cookTime + input.chillTime;
-
-    await prisma.recipe.update({
-        where: {
-            id: input.id
-        },
-        data: {
-            ...restInput,
-            imageId: uploadImageResult?.id,
-            image: uploadImageResult?.url,
-            totalTime,
-            ingredients: {
-                deleteMany: {},
-                createMany: {
-                    data: ingredients
-                }
-            },
-            instructions: {
-                deleteMany: {},
-                createMany: { data: instructions }
+    try {
+        if (input.image && input.image !== recipe.image) {
+            if (recipe.imageId) {
+                deleteImage(recipe.imageId);
             }
-        }
-    });
 
-    return getRecipe(context, input.id);
+            uploadImageResult = await uploadImage(input.image);
+        }
+
+        const totalTime = input.prepTime + input.cookTime + input.chillTime;
+
+        await prisma.recipe.update({
+            where: {
+                id: input.id
+            },
+            data: {
+                ...restInput,
+                imageId: uploadImageResult?.id,
+                image: uploadImageResult?.url,
+                totalTime,
+                ingredients: {
+                    deleteMany: {},
+                    createMany: {
+                        data: ingredients
+                    }
+                },
+                instructions: {
+                    deleteMany: {},
+                    createMany: { data: instructions }
+                }
+            }
+        });
+
+        return getRecipe(context, input.id);
+    } catch (e) {
+        console.error(e);
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+    }
 };
 
 const deleteRecipe = async (context: Context, id: string) => {

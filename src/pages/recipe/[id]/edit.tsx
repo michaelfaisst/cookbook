@@ -61,6 +61,7 @@ const NewRecipePage = () => {
                     ));
                 },
                 onError: (e) => {
+                    console.error(e);
                     toast.custom((t) => (
                         <Notification
                             visible={t.visible}

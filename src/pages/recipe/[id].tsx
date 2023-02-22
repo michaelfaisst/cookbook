@@ -32,6 +32,9 @@ const RecipePage = () => {
                 onSuccess: () => {
                     trpcHelper.recipes.getRecipes.invalidate();
                     router.push("/");
+                },
+                onError: (e) => {
+                    console.error(e);
                 }
             }
         );

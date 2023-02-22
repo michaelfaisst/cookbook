@@ -34,6 +34,9 @@ const NewRecipePage = () => {
         await saveRecipeMutation.mutateAsync(data, {
             onSuccess: (data) => {
                 router.push(`/recipe/${data.id}`);
+            },
+            onError: (e) => {
+                console.error(e);
             }
         });
     };
