@@ -103,6 +103,8 @@ const updateRecipe = async (context: Context, input: UpdateRecipeInputType) => {
     const { ingredients, instructions, ...restInput } = input;
     let uploadImageResult: IUploadResult | undefined = undefined;
 
+    console.log(input.image);
+
     if (input.image && input.image !== recipe.image) {
         if (recipe.imageId) {
             deleteImage(recipe.imageId);

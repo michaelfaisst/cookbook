@@ -59,6 +59,16 @@ const NewRecipePage = () => {
                             description={`Dein Rezept "${data.name}" wurde erfolgreich gespeichert!`}
                         />
                     ));
+                },
+                onError: (e) => {
+                    toast.custom((t) => (
+                        <Notification
+                            visible={t.visible}
+                            type="error"
+                            title="Error"
+                            description={e.message}
+                        />
+                    ));
                 }
             }
         );

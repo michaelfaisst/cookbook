@@ -1,11 +1,14 @@
 import { Fragment } from "react";
 
 import { Transition } from "@headlessui/react";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import {
+    CheckCircleIcon,
+    ExclamationCircleIcon
+} from "@heroicons/react/24/outline";
 
 interface Props {
     visible: boolean;
-    type: "success";
+    type: "success" | "error";
     title: string;
     description: string;
 }
@@ -28,7 +31,11 @@ const Notification = (props: Props) => {
             <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                 <div className="flex items-start p-4">
                     <div className="flex-shrink-0">
-                        <CheckCircleIcon className="h-6 w-6 text-green-400" />
+                        {type === "success" ? (
+                            <CheckCircleIcon className="h-6 w-6 text-green-400" />
+                        ) : (
+                            <ExclamationCircleIcon className="h-6 w-6 text-red-400" />
+                        )}
                     </div>
                     <div className="ml-3 w-0 flex-1 pt-0.5">
                         <p className="text-sm font-medium text-gray-900">
