@@ -3,11 +3,11 @@ import type { User } from "next-auth";
 import { TRPCError } from "@trpc/server";
 
 import { prisma } from "@/server/db/client";
-import {
+import type {
     CreateRecipeInputType,
-    UpdateRecipeInputType,
-    searchRecipesInputSchema
+    UpdateRecipeInputType
 } from "@/utils/validators";
+import { searchRecipesInputSchema } from "@/utils/validators";
 import {
     createRecipeInputSchema,
     deleteRecipeInputSchema,
@@ -15,11 +15,8 @@ import {
     updateRecipeInputSchema
 } from "@/utils/validators";
 
-import {
-    IUploadResult,
-    deleteImage,
-    uploadImage
-} from "../../common/cloudinary";
+import type { IUploadResult } from "../../common/cloudinary";
+import { deleteImage, uploadImage } from "../../common/cloudinary";
 import type { Context } from "../context";
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 
@@ -38,7 +35,12 @@ const getRecipes = () => {
                     id: true
                 }
             }
-        }
+        },
+        orderBy: [
+            {
+                createdAt: "desc"
+            }
+        ]
     });
 };
 

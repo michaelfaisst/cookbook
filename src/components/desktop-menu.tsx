@@ -53,6 +53,7 @@ const DesktopMenu = () => {
                     placeholder="Suche"
                     className="cursor-pointer"
                     icon={MagnifyingGlassIcon}
+                    readOnly
                 />
             </div>
             <div>{renderUser()}</div>

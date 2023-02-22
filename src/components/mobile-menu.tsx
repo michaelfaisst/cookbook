@@ -35,7 +35,7 @@ const MobileMenu = () => {
 
             <div
                 className={clsx(
-                    "fixed w-screen h-screen inset-0 bg-rose-300 z-50 transition-all flex flex-col",
+                    "fixed inset-0 bg-rose-300 z-50 transition-all flex flex-col",
                     { "opacity-0": !menuOpen },
                     { "opacity-100": menuOpen },
                     { "-translate-y-full": !menuOpen },

@@ -94,7 +94,10 @@ const RecipeSearch = NiceModal.create(() => {
                                             }}
                                         >
                                             <Image
-                                                src={recipe.image || ""}
+                                                src={
+                                                    recipe.image ||
+                                                    "/images/placeholder.png"
+                                                }
                                                 alt={recipe.name}
                                                 width={48}
                                                 height={48}
