@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import Resizer from "react-image-file-resizer";
 
-import Image from "next/image";
+import NextImage from "next/image";
 
 interface Props {
     value: string | null;
@@ -38,26 +38,31 @@ const ImageUpload = ({ value, onChange }: Props) => {
             }
 
             const resizedImage = await resizeFile(acceptedFiles[0]);
-
             onChange(resizedImage ?? null);
         },
         [onChange]
     );
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    const { open, getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
         multiple: false,
-        maxFiles: 1
+        maxFiles: 1,
+        noClick: true,
+        accept: {
+            "image/png": [".png"],
+            "image/jpeg": [".jpeg", ".jpg"]
+        }
     });
 
     return (
         <div
             {...getRootProps()}
             className="relative flex h-64 w-full items-center justify-center border border-dashed border-rose-200 bg-slate-50"
+            onClick={open}
         >
             <input {...getInputProps()} />
             {value ? (
-                <Image
+                <NextImage
                     src={value}
                     fill
                     className="object-contain p-8"

@@ -22,9 +22,16 @@ const NewRecipePage = () => {
     const router = useRouter();
     const { id } = router.query;
 
-    const { data: recipe, isLoading } = trpc.recipes.getRecipe.useQuery({
-        id: id as string
-    });
+    const { data: recipe, isLoading } = trpc.recipes.getRecipe.useQuery(
+        {
+            id: id as string
+        },
+        {
+            onError: (error) => {
+                console.error(error);
+            }
+        }
+    );
 
     const formMethods = useForm<UpdateRecipeInputType>({
         resolver: zodResolver(createRecipeInputSchema),
