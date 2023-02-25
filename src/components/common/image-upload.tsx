@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import Resizer from "react-image-file-resizer";
 
 import Image from "next/image";
 
@@ -9,22 +10,36 @@ interface Props {
 }
 
 const ImageUpload = ({ value, onChange }: Props) => {
+    const resizeFile = (file?: File): Promise<string | undefined> => {
+        if (!file) {
+            return Promise.resolve(undefined);
+        }
+
+        return new Promise((resolve) => {
+            Resizer.imageFileResizer(
+                file,
+                1920,
+                1920,
+                "WEBP",
+                90,
+                0,
+                (uri) => {
+                    resolve(uri as string);
+                },
+                "base64"
+            );
+        });
+    };
+
     const onDrop = useCallback(
-        (acceptedFiles: File[]) => {
-            console.log(acceptedFiles);
+        async (acceptedFiles: File[]) => {
             if (acceptedFiles.length == 0) {
                 return;
             }
 
-            const reader = new FileReader();
+            const resizedImage = await resizeFile(acceptedFiles[0]);
 
-            reader.onload = (e: ProgressEvent<FileReader>) => {
-                if (e.target) {
-                    onChange(e.target.result as string);
-                }
-            };
-
-            reader.readAsDataURL(acceptedFiles[0] as Blob);
+            onChange(resizedImage ?? null);
         },
         [onChange]
     );

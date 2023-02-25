@@ -23,16 +23,16 @@ const resizeImageAndConvertImage = async (imageString: string) => {
 
     const imageBuffer = Buffer.from(uri, "base64");
 
-    const resizedImageBuffer = await sharp(imageBuffer)
+    const resizedImage = await sharp(imageBuffer)
         .resize({
             width: 1920,
             height: 1920,
             withoutEnlargement: true
         })
-        .webp({ quality: 90 })
+        .webp({ quality: 100 })
         .toBuffer();
 
-    return `data:image/webp;base64,${resizedImageBuffer.toString("base64")}`;
+    return `data:image/webp;base64,${resizedImage.toString("base64")}`;
 };
 
 export const uploadImage = async (imageString: string | null) => {
